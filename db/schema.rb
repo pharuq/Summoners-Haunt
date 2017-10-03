@@ -10,7 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827070519) do
+ActiveRecord::Schema.define(version: 20170921143423) do
+
+  create_table "diaries", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_diaries_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_diaries_on_user_id"
+  end
+
+  create_table "diary_comments", force: :cascade do |t|
+    t.integer "diary_id"
+    t.integer "user_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diary_id", "created_at"], name: "index_diary_comments_on_diary_id_and_created_at"
+    t.index ["diary_id"], name: "index_diary_comments_on_diary_id"
+    t.index ["user_id"], name: "index_diary_comments_on_user_id"
+  end
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "from_request_user_id"
+    t.integer "to_request_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_request_user_id", "to_request_user_id"], name: "requests_index", unique: true
+    t.index ["from_request_user_id"], name: "index_friend_requests_on_from_request_user_id"
+    t.index ["to_request_user_id"], name: "index_friend_requests_on_to_request_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "from_user_id"
+    t.integer "to_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_user_id", "to_user_id"], name: "index_friendships_on_from_user_id_and_to_user_id", unique: true
+    t.index ["from_user_id"], name: "index_friendships_on_from_user_id"
+    t.index ["to_user_id"], name: "index_friendships_on_to_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.integer "from_user_id"
+    t.integer "to_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_user_id", "to_user_id", "created_at"], name: "index_messages_on_from_user_id_and_to_user_id_and_created_at"
+    t.index ["from_user_id"], name: "index_messages_on_from_user_id"
+    t.index ["to_user_id"], name: "index_messages_on_to_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -27,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170827070519) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_send_at"
+    t.string "picture"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -1,4 +1,17 @@
-<!-- <%= link_to gravatar_for(current_user, size: 50), current_user %> -->
-<h1><%= current_user.name %></h1>
-<span><%= link_to "view my profile", current_user %></span>
-<!-- <span><%= pluralize(current_user.microposts.count, "micropost") %></span> -->
+<dev class="user_info">
+  <% if @user.picture? %>
+    <%= image_tag @user.picture.url %>
+  <% else %>
+    <%= image_tag '/m_e_others_480_240x240.jpg' %>
+  <% end %>
+  <h2><%= link_to @user.name, @user %></h2>
+</dev>
+
+<% unless current_user?(@user) %>
+  <%= render 'follow_form' %>
+  <%= link_to "メッセージ", user_messages_path(@user.id), class: "message btn btn-default" %>
+<% end %>
+
+<dev class="user_friends">
+  <%= render 'shared/user_friends' %>
+</dev>

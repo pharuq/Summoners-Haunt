@@ -40,6 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 3em;
+  text-indent:-2em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
@@ -47,6 +48,7 @@ h1 {
 
 h2 {
   font-size: 1.2em;
+  text-indent:-1em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
@@ -87,15 +89,6 @@ aside {
   }
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
-
-.gravatar_edit {
-  margin-top: 15px;
-}
-
 .stats {
   overflow: auto;
   margin-top: 0;
@@ -119,17 +112,18 @@ aside {
   }
 }
 
-.user_avatars {
+.user_friends {
   overflow: auto;
   margin-top: 10px;
-  .gravatar {
-    margin: 1px 1px;
-  }
-  a {
+  .thumb {
+    margin: 0 0 3px 1px;
+    border-radius: 50%;
     padding: 0;
   }
+  .friends_show {
+    text-align: right;
+  }
 }
-
 .users.follow {
   padding: 0;
 }
@@ -219,16 +213,6 @@ footer {
   }
 }
 
-/* miscellaneous */
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box-sizing;
-}
-
 /* Users index */
 
 .users {
@@ -241,44 +225,33 @@ footer {
   }
 }
 
-/* microposts */
+/* diaries */
 
-.microposts {
+.diaries {
   list-style: none;
   padding: 0;
   li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
+  li:last-child {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
   }
-  .content {
-    display: block;
-    margin-left: 60px;
-    img {
-      display: block;
-      padding: 5px 0;
-    }
+  .title {
+    text-align: left;
+    float: left;
   }
   .timestamp {
     color: $gray-light;
-    display: block;
-    margin-left: 60px;
-  }
-  .gravatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
+    float: right;
   }
 }
 
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
+.read_more {
+  display: block;
+  text-align: right;
 }
 
 span.picture {
@@ -286,4 +259,21 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+/* message */
+
+.message {
+  display: block;
+}
+
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box-sizing;
 }

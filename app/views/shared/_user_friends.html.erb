@@ -1,0 +1,11 @@
+<h3>Friends</h3>
+<% @user.friends.each do |friend| %>
+  <% if friend.picture? %>
+    <%= link_to image_tag(friend.picture.url, alt: friend.name, class: "thumb"), friend %>
+  <% else %>
+    <%=link_to image_tag('/m_e_others_480_80x80.jpg', alt: friend.name, class: "thumb"), friend %>
+  <% end %>
+<% end %>
+<dev class="friends_show">
+<p><%= link_to "友達一覧（#{@user.friends.count}）", friends_user_path(@user) %></p>
+</dev>

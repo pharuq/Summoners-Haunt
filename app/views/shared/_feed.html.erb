@@ -1,0 +1,8 @@
+<% if @diaries.any? %>
+  <ol class="diaries">
+    <% @diaries.each_with_index do |diary,count| %>
+      <% break if count == MAX_SHOW_FEED %>
+      <%= render diary %>
+    <% end %>
+  </ol>
+<% end %>

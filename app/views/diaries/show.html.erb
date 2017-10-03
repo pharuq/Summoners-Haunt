@@ -1,0 +1,33 @@
+<% provide(:title, @diary.title) %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1><%= @diary.title %></h1>
+
+    <% if current_user?(@diary.user) %>
+      <%= link_to "delete", @diary, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+
+    <p><%= @diary.content %></p>
+
+    <% if @diary_comments.any? %>
+      <ul class="diary_comments">
+        <%= render @diary_comments %>
+      </ul>
+
+    <% end %>
+
+    <%= form_for(@diary_comment)  do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= hidden_field :diary_comment, :diary_id, value: @diary.id %>
+
+      <%= f.label :content %>
+      <%= f.text_area :content, class: 'form-control' %>
+
+      <%= f.submit "コメントする", class: "btn btn-primary" %>
+
+    <% end %>
+  </div>
+</div>

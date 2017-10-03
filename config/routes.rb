@@ -6,12 +6,18 @@ Rails.application.routes.draw do
   delete '/logout' , to: 'sessions#destroy'
   resources :users do
     member do
+      get :diaries
       get :friends
     end
+    collection do
+      get :feed
+    end
+    resources :messages,            only: [:new, :create, :index]
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :diaries
-  # resources :relationships,           only: [:create, :destroy]
+  resources :diary_comments,  only: [:create, :destroy]
+  resources :friendships,           only: [:create, :destroy]
 
 end

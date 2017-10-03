@@ -1,10 +1,9 @@
 class User < ApplicationRecord
   has_many :diaries, dependent: :destroy
-  has_many :friends, dependent: :destroy
-  # has_many :passive_relationships, class_name:  "Relationship",
-  #                                                foreign_key: "followed_id",
-  #                                                dependent:   :destroy
-  # has_many :followers, through: :passive_relationships, source: :follower
+  has_many :diary_comments, dependent: :destroy
+  has_many :friendships, foreign_key: "from_user_id",
+                                      dependent:   :destroy
+  has_many :friends, through: :friendships, source: :to_user
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
@@ -15,6 +14,8 @@ class User < ApplicationRecord
                                                   uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -76,25 +77,46 @@ class User < ApplicationRecord
 
   # ユーザーのステータスフィードを返す
   def feed
-    # following_ids = "SELECT followed_id FROM relationships
-    #                  WHERE follower_id = :user_id"
-    # Micropost.where("user_id IN (#{following_ids})
-    #                  OR user_id = :user_id", user_id: id)
+    friends_ids = "SELECT to_user_id FROM friendships
+                     WHERE from_user_id = :user_id"
+    Diary.where("user_id IN (#{friends_ids})
+                     OR user_id = :user_id", user_id: id)
   end
 
-  # ユーザーをフォローする
+  # ユーザーに友達申請を送る
   def follow(other_user)
-    # active_relationships.create(followed_id: other_user.id)
+    friendships.create(to_user_id: other_user.id)
   end
 
-  # ユーザーをフォロー解除する
+  # ユーザーを友達から外す
   def unfollow(other_user)
-    # active_relationships.find_by(followed_id: other_user.id).destroy
+    friendships.find_by(to_user_id: other_user.id).destroy
   end
 
-  # 現在のユーザーがフォローしてたらtrueを返す
-  def following?(other_user)
-    # following.include?(other_user)
+  # 現在のユーザーが友達であればtrueを返す
+  def friends?(other_user)
+    friends.include?(other_user)
+  end
+
+  # 相手ユーザーとのメッセージを返す
+  def messages(other_user)
+    Message.where("(from_user_id = :user_id
+                          AND to_user_id = :other_id) OR
+                            (from_user_id = :other_id
+                          AND to_user_id = :user_id)", user_id: id, other_id: other_user.to_i)
+  end
+
+  def self.search(search)
+    if search
+      User.where(['name LIKE ?
+                          AND role LIKE ?
+                          AND profile LIKE ?',
+                          "%#{search[:name]}%",
+                          "%#{search[:role]}%",
+                          "%#{search[:profile]}%"])
+    else
+      User.all
+    end
   end
 
   private
@@ -110,4 +132,10 @@ class User < ApplicationRecord
     self.activation_digest = User.digest(activation_token)
   end
 
+  # アップロードされた画像のサイズをバリデーションする
+  def picture_size
+    if picture.size > 5.megabytes
+      errors.add(:picture, "should be less than 5MB")
+    end
+  end
 end

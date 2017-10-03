@@ -1,0 +1,11 @@
+<li id="diary_comment-<%= diary_comment.id %>">
+  <span class="title"><%= diary_comment.user.name %><br></span>
+    <span class="title"><%= diary_comment.content %></span>
+  <dev class="timestamp">
+    Posted <%= time_ago_in_words(diary_comment.created_at) %> ago.
+    <% if current_user?(diary_comment.user) %>
+      <%= link_to "delete", diary_comment, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </dev>
+</li>

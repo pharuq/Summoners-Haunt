@@ -1,0 +1,18 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-3">
+    <section class="user_info">
+      <%= render 'shared/user_info' %>
+    </section>
+    <%= link_to "日記作成", new_diary_path %>
+  </aside>
+  <dev class="col-md-6">
+    <% if @user.diaries.any? %>
+      <h3>Diaries (<%= @user.diaries.count %>)</h3>
+      <ol class="diaries">
+        <%= render @diaries %>
+      </ol>
+      <%= will_paginate @diaries %>
+    <% end %>
+  </dev>
+</div>

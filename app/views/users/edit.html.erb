@@ -22,10 +22,24 @@
       <%= f.text_field :role, class: 'form-control' %>
 
       <%= f.label :profile %>
-    <%= f.text_area :profile, class: 'form-control' %>
+      <%= f.text_area :profile, class: 'form-control' %>
 
       <%= f.submit "Save changes", class: "btn btn-primary" %>
+
+      <span class="picture">
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      </span>
     <% end %>
 
   </div>
 </div>
+
+
+<script type="text/javascript">
+  $('#user_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>

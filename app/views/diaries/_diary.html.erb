@@ -1,0 +1,7 @@
+<li id="diary-<%= diary.id %>">
+  <span class="title"><%= link_to diary.title, diary %></span>
+  <dev class="timestamp">
+    <%= link_to diary.user.name, diary.user %> Posted
+    <%= time_ago_in_words(diary.created_at) %> ago.
+  </dev>
+</li>
