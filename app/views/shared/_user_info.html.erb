@@ -8,7 +8,7 @@
 </dev>
 
 <% unless current_user?(@user) %>
-  <%= render 'follow_form' %>
+  <%= render 'shared/follow_form' %>
   <%= link_to "メッセージ", user_messages_path(@user.id), class: "message btn btn-default" %>
 <% end %>
 

@@ -35,7 +35,7 @@ class DiariesController < ApplicationController
   private
 
   def diary_params
-    params.require(:diary).permit(:title, :content)
+    params.require(:diary).permit(:title, :content, :shared_with)
   end
 
   def correct_user

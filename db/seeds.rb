@@ -16,23 +16,21 @@ User.create!(name:  "Example User",
                email: email,
                password:              password,
                password_confirmation: password,
-               role: "#{n}role",
-               profile: "#{n}profile",
+               role: "#{n} role",
+               profile: "#{n} profile",
                activated: true,
                activated_at: Time.zone.now)
 end
 
 users = User.order(:created_at).take(6)
 50.times do |n|
-  title = "nunmber#{n+1} title"
+  title = "#{n+1} title"
   content = Faker::Lorem.sentence(5)
   users.each { |user| user.diaries.create!(title: title, content: content) }
 end
 
 # リレーションシップ
-# users = User.all
-# user = users.first
-# following = users[2..50]
-# followers = users[4..40]
-# following.each { |followed| user.follow(followed)}
-# followers.each { |follower| follower.follow(user)}
+users = User.all
+user = users.first
+follow = users[2..50]
+follow.each { |followed| user.follow(followed)}

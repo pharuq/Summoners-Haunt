@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921143423) do
+ActiveRecord::Schema.define(version: 20171006141253) do
 
   create_table "diaries", force: :cascade do |t|
     t.string "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170921143423) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "shared_with", default: 0
     t.index ["user_id", "created_at"], name: "index_diaries_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end

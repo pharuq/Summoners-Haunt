@@ -12,6 +12,13 @@
       <%= f.label :content %>
       <%= f.text_area :content, class: 'form-control' %>
 
+      <%= f.label :shared_with, '公開範囲' %><br>
+      <label><%= f.radio_button :shared_with, SHARED_WITH_OPEN,
+                                              class: 'shared-with' %>全体</label>
+
+      <label><%= f.radio_button :shared_with, SHARED_WITH_FRIENDS_ONLY,
+                                              class: 'shared-with' %>友達のみ</label>
+
       <%= f.submit "投稿", class: "btn btn-primary" %>
 
     <% end %>

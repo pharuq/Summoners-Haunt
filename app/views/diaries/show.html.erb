@@ -1,33 +1,41 @@
 <% provide(:title, @diary.title) %>
-
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h1><%= @diary.title %></h1>
+  <aside class="col-md-3">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+  </aside>
+  <div class="col-md-6">
+    <% if shared_with?(@diary) %>
+      <h1><%= @diary.title %></h1>
 
-    <% if current_user?(@diary.user) %>
-      <%= link_to "delete", @diary, method: :delete,
-                                       data: { confirm: "You sure?" } %>
-    <% end %>
+      <% if current_user?(@diary.user) %>
+        <%= link_to "delete", @diary, method: :delete,
+                                         data: { confirm: "You sure?" } %>
+      <% end %>
 
-    <p><%= @diary.content %></p>
+      <p><%= @diary.content %></p>
 
-    <% if @diary_comments.any? %>
-      <ul class="diary_comments">
-        <%= render @diary_comments %>
-      </ul>
+      <% if @diary_comments.any? %>
+        <ul class="diary_comments">
+          <%= render @diary_comments %>
+        </ul>
 
-    <% end %>
+      <% end %>
 
-    <%= form_for(@diary_comment)  do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+      <%= form_for(@diary_comment)  do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
 
-      <%= hidden_field :diary_comment, :diary_id, value: @diary.id %>
+        <%= hidden_field :diary_comment, :diary_id, value: @diary.id %>
 
-      <%= f.label :content %>
-      <%= f.text_area :content, class: 'form-control' %>
+        <%= f.label :content %>
+        <%= f.text_area :content, class: 'form-control' %>
 
-      <%= f.submit "コメントする", class: "btn btn-primary" %>
+        <%= f.submit "コメントする", class: "btn btn-primary" %>
 
+      <% end %>
+    <% else %>
+      <h2>友達限定の日記です。</h2>
     <% end %>
   </div>
 </div>
