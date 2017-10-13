@@ -1,0 +1,3 @@
+<%= form_for(current_user.active_pending_friendships.find_by(to_user_id: @user.id), remote: true) do |f| %>
+  <%= f.submit "承認待ち", class: "btn btn-primary", disabled: true %>
+<% end %>

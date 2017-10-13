@@ -17,8 +17,10 @@
     <p>role:<%= @user.role %></p>
     <p>profile:<%= @user.profile %></p>
     <%= render 'shared/feed' %>
-    <dev class="read_more">
-      <%= link_to "read more...", diaries_user_path(@user) %>
-    </dev>
+    <% if @diaries.any? %>
+      <dev class="read_more">
+        <%= link_to "read more...", diaries_user_path(@user) %>
+      </dev>
+    <% end %>
   </div>
 </div>

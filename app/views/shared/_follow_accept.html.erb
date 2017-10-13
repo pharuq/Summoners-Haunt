@@ -1,0 +1,10 @@
+<%= form_for(current_user.passive_pending_friendships.find_by(from_user_id: @user.id), remote: true) do |f| %>
+  <div><%= hidden_field_tag :to_user_id, @user.id %></div>
+  <%= f.submit "承認", class: "btn btn-primary" %>
+<% end %>
+<%= form_for(current_user.get_friendship_id(@user).first,
+                                                    html: { method: :delete },
+                                                    remote: true) do |f| %>
+  <div><%= hidden_field_tag :to_user_id, @user.id %></div>
+  <%= f.submit "申請を破棄する", class: "btn btn-primary", data: { confirm: "破棄しますか？" } %>
+<% end %>

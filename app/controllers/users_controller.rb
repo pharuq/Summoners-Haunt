@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def friends
     @user  = User.find(params[:id])
-    @users = @user.friends.paginate(page: params[:page])
+    @users = @user.friends.paginate(page: params[:page], :per_page => 20)
     render 'show_friends'
   end
 

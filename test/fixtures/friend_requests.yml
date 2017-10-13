@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  from_request_user: 1
-  to_request_user: 1
-
-two:
-  from_request_user: 1
-  to_request_user: 1

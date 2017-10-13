@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :diaries
   resources :diary_comments,  only: [:create, :destroy]
-  resources :friendships,           only: [:create, :destroy]
+  resources :friendships,           only: [:create, :update, :destroy]
 
 end

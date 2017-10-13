@@ -64,8 +64,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    easy_settings (0.1.2)
-      hashie (~> 3.4.3)
     erubi (1.6.1)
     excon (0.59.0)
     execjs (2.7.0)
@@ -222,7 +220,6 @@ GEM
     formatador (0.2.5)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    hashie (3.4.6)
     i18n (0.8.6)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -234,6 +231,18 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.6)
+    kaminari (1.0.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.0.1)
+      kaminari-activerecord (= 1.0.1)
+      kaminari-core (= 1.0.1)
+    kaminari-actionview (1.0.1)
+      actionview
+      kaminari-core (= 1.0.1)
+    kaminari-activerecord (1.0.1)
+      activerecord
+      kaminari-core (= 1.0.1)
+    kaminari-core (1.0.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -359,11 +368,11 @@ DEPENDENCIES
   byebug
   carrierwave
   coffee-rails (~> 4.2)
-  easy_settings
   faker
   fog
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari
   listen
   mini_magick
   minitest-reporters

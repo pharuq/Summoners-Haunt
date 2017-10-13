@@ -29,7 +29,7 @@ users = User.order(:created_at).take(6)
   users.each { |user| user.diaries.create!(title: title, content: content) }
 end
 
-# リレーションシップ
+# Friends
 users = User.all
 user = users.first
 follow = users[2..50]

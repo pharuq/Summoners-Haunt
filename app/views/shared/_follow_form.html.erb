@@ -1,6 +1,8 @@
 <div id="follow_form">
-  <% if current_user.friends?(@user) %>
+  <% if current_user.friends?(@user) || current_user.active_pending_friends?(@user) %>
     <%= render 'shared/unfollow' %>
+  <% elsif current_user.passive_pending_friends?(@user) %>
+    <%= render 'shared/follow_accept' %>
   <% else %>
     <%= render 'shared/follow' %>
   <% end %>

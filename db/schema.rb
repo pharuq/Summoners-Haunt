@@ -34,19 +34,10 @@ ActiveRecord::Schema.define(version: 20171006141253) do
     t.index ["user_id"], name: "index_diary_comments_on_user_id"
   end
 
-  create_table "friend_requests", force: :cascade do |t|
-    t.integer "from_request_user_id"
-    t.integer "to_request_user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["from_request_user_id", "to_request_user_id"], name: "requests_index", unique: true
-    t.index ["from_request_user_id"], name: "index_friend_requests_on_from_request_user_id"
-    t.index ["to_request_user_id"], name: "index_friend_requests_on_to_request_user_id"
-  end
-
   create_table "friendships", force: :cascade do |t|
     t.integer "from_user_id"
     t.integer "to_user_id"
+    t.boolean "activated", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from_user_id", "to_user_id"], name: "index_friendships_on_from_user_id_and_to_user_id", unique: true
