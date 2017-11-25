@@ -1,0 +1,20 @@
+<li id="community_topic-<%= community_topic.id %>">
+  <div class="title">
+    <span><%= link_to truncate(community_topic.title, length: 50),
+                        community_community_topic_path(@community, community_topic) %></span>
+  </div>
+  <div class="content">
+    <%= truncate(community_topic.content, length: 75) %>
+  </div>
+  <dev class="timestamp">
+    <% if community_topic.user.picture? %>
+      <%= link_to image_tag(community_topic.user.picture.url(:mini_thumb),
+                    alt: community_topic.user.name, class: "mini_thumb"), community_topic.user %>
+    <% else %>
+      <%=link_to image_tag('/m_e_others_480_24x24.jpg',
+                    alt: community_topic.user.name, class: "mini_thumb"), community_topic.user %>
+    <% end %>
+    <%= link_to community_topic.user.name, community_topic.user %> Posted
+    <%= time_ago_in_words(community_topic.created_at) %> ago.
+  </dev>
+</li>

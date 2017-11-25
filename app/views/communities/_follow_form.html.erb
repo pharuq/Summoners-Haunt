@@ -1,0 +1,7 @@
+<div id="follow_form">
+  <% if @community.members?(@user) %>
+    <%= render 'communities/unfollow' %>
+  <% else %>
+    <%= render 'communities/follow' %>
+  <% end %>
+</div>

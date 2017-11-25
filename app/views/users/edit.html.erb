@@ -24,22 +24,21 @@
       <%= f.label :profile %>
       <%= f.text_area :profile, class: 'form-control' %>
 
-      <%= f.submit "Save changes", class: "btn btn-primary" %>
+      <%= f.submit "変更する", class: "btn btn-primary submit" %>
 
       <span class="picture">
-        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class:'input_picture' %>
       </span>
+
+      <div id="crop_area_box">
+        <img id="crop_image" src="#" class="img-responsive hidden"/>
+      </div>
+
+      <%= hidden_field :user, :image_w, id: 'image_w' %>
+      <%= hidden_field :user, :image_h, id: 'image_h' %>
+      <%= hidden_field :user, :image_x, id: 'image_x' %>
+      <%= hidden_field :user, :image_y, id: 'image_y' %>
     <% end %>
 
   </div>
 </div>
-
-
-<script type="text/javascript">
-  $('#user_picture').bind('change', function() {
-    var size_in_megabytes = this.files[0].size/1024/1024;
-    if (size_in_megabytes > 5) {
-      alert('Maximum file size is 5MB. Please choose a smaller file.');
-    }
-  });
-</script>

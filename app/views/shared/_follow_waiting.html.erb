@@ -1,3 +1,5 @@
-<%= form_for(current_user.active_pending_friendships.find_by(to_user_id: @user.id), remote: true) do |f| %>
-  <%= f.submit "承認待ち", class: "btn btn-primary", disabled: true %>
+<%= form_for('#') do |f| %>
+  <%= button_tag type: :submit, disabled: true, class: "change-submit" do %>
+    <%= image_tag "/frined_add_icon.png", alt: "承認待ち", class: "center-block" %>
+  <% end %>
 <% end %>

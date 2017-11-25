@@ -1,0 +1,23 @@
+<div class="panel panel-success sidebar_user_friends">
+  <div class="panel-heading">
+    <h3 class="panel-title">メンバー</h3>
+  </div>
+  <div class="panel-body">
+    <% @community.community_members.each_with_index do |friend,count| %>
+      <% break if count == MAX_SHOW_FRIENDS %>
+      <dev class="sidebar_thumbs">
+        <% if friend.picture? %>
+          <%= link_to image_tag(friend.picture.url(:thumb), alt: friend.name, class: "thumb"), friend %>
+        <% else %>
+          <%=link_to image_tag('/m_e_others_480_80x80.jpg', alt: friend.name, class: "thumb"), friend %>
+        <% end %>
+        <%=link_to truncate(friend.name, length: 20), friend %>
+      </dev>
+    <% end %>
+
+    <dev class="sidebar_index_friends">
+      <%= link_to "メンバー一覧（#{@community.community_members.count}）",
+                                                    members_community_path(@community) %>
+    </dev>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<li>
+  <div class="icon">
+    <% if community.picture? %>
+      <%= link_to image_tag(community.picture.url(:thumb), alt: community.name, class: "thumb"), community %>
+    <% else %>
+      <%=link_to image_tag('/m_e_others_480_80x80.jpg', alt: community.name, class: "thumb"), community %>
+    <% end %>
+  </div>
+  <span class="name"><%= link_to community.name, community %></span>
+  <span class="content"><%= community.content %></span>
+  <% if current_user.admin? %>
+    | <%= link_to "delete", community, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

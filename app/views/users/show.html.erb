@@ -1,5 +1,4 @@
 <% provide(:title, @user.name) %>
-
 <div class="row">
   <aside class="col-md-3">
     <section>
@@ -7,20 +6,35 @@
     </section>
   </aside>
   <div class="col-md-6">
-    <% if current_user?(@user) %>
-      <%= link_to "日記作成", new_diary_path %>
-      <%= link_to "edit", edit_user_path %>
-    <% else %>
-      <%= link_to "メッセージ作成", new_user_message_path(@user.id) %>
-    <% end %>
-    <p>name:<%= @user.name %></p>
-    <p>role:<%= @user.role %></p>
-    <p>profile:<%= @user.profile %></p>
-    <%= render 'shared/feed' %>
-    <% if @diaries.any? %>
-      <dev class="read_more">
-        <%= link_to "read more...", diaries_user_path(@user) %>
-      </dev>
-    <% end %>
+    <div class="profile-table-wrapper">
+      <table class="profile-table">
+        <tbody>
+          <tr>
+            <th colspan="2">サモナー情報</th>
+          </tr>
+          <tr>
+            <td class="profile-table-header">名前</td>
+            <td class="profile-table-content"><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>ロール</td>
+            <td><%= @user.role %></td>
+          </tr>
+          <tr>
+            <td>プロフィール</td>
+            <td><%= simple_format(@user.profile) %></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">日記一覧</h3>
+      </div>
+      <div class="panel-body">
+        <%= render 'shared/feed' %>
+      </div>
+    </div>
   </div>
 </div>

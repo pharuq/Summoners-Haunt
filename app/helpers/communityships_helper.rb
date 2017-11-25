@@ -1,0 +1,2 @@
+module CommunityshipsHelper
+end

@@ -34,3 +34,4 @@ users = User.all
 user = users.first
 follow = users[2..50]
 follow.each { |followed| user.follow(followed)}
+Friendship.all.update_all(activated: true)

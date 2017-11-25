@@ -1,0 +1,11 @@
+<li id="community_comment-<%= community_comment.id %>">
+  <span class="title"><%= community_comment.user.name %><br></span>
+    <span class="title"><%= community_comment.content %></span>
+  <dev class="timestamp">
+    Posted <%= time_ago_in_words(community_comment.created_at) %> ago.
+    <% if current_user?(community_comment.user) %>
+      <%# link_to "delete", community_comment, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </dev>
+</li>

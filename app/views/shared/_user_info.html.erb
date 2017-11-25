@@ -1,17 +1,33 @@
-<dev class="user_info">
-  <% if @user.picture? %>
-    <%= image_tag @user.picture.url %>
-  <% else %>
-    <%= image_tag '/m_e_others_480_240x240.jpg' %>
-  <% end %>
-  <h2><%= link_to @user.name, @user %></h2>
-</dev>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= show_big_thumb(@user) %>
+  </div>
+  <div class="panel-footer">
+    <h2 class="user_name"><%= link_to @user.name, @user %></h2>
+    <ul class="user-info-icon-wrap">
+      <% if current_user?(@user) %>
+        <%= link_to new_diary_path do %>
+          <li class="user-info-icon border-right">
+            <%= image_tag('/new_diary_icon.png', alt: "diary", class: "center-block") %>
+          </li>
+        <% end %>
+        <%= link_to edit_user_path(@user) do %>
+          <li class="user-info-icon">
+            <%= image_tag('/edit_user_icon.png', alt: "edit_user", class: "center-block") %>
+          </li>
+        <% end %>
+      <% else %>
+        <%= render 'shared/follow_form' %>
+        <%= link_to user_messages_path(@user.id) do %>
+          <li class="user-info-icon">
+            <%= image_tag('/massage_icon.png', alt: "massage", class: "center-block") %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<% unless current_user?(@user) %>
-  <%= render 'shared/follow_form' %>
-  <%= link_to "メッセージ", user_messages_path(@user.id), class: "message btn btn-default" %>
-<% end %>
+<%= render 'shared/user_friends' %>
 
-<dev class="user_friends">
-  <%= render 'shared/user_friends' %>
-</dev>
+<%= render 'shared/user_communities' %>

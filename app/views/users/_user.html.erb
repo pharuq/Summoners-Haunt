@@ -1,5 +1,13 @@
 <li>
-  <%= link_to user.name, user %>
+  <div class="icon">
+    <% if user.picture? %>
+      <%= link_to image_tag(user.picture.url(:thumb), alt: user.name, class: "thumb"), user %>
+    <% else %>
+      <%=link_to image_tag('/m_e_others_480_80x80.jpg', alt: user.name, class: "thumb"), user %>
+    <% end %>
+  </div>
+  <span class="name"><%= link_to user.name, user %></span>
+  <span class="profile"><%= user.profile %></span>
   <% if current_user.admin? && !current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>

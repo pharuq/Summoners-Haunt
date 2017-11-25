@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% if @community.picture? %>
+      <%= image_tag @community.picture.url %>
+    <% else %>
+      <%= image_tag '/m_e_others_480_240x240.jpg' %>
+    <% end %>
+  </div>
+  <div class="panel-footer"><h2><%= link_to @community.name, @community %></h2></div>
+</div>
+
+<% if current_user?(@community.user) %>
+  <%= link_to "編集画面", edit_community_path(@community), class: "message btn btn-default" %>
+<% else %>
+  <%= render 'communities/follow_form' %>
+<% end %>
+
+<dev class="user_friends">
+  <%= render 'communities/community_members' %>
+</dev>

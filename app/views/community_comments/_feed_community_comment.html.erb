@@ -1,0 +1,19 @@
+<li id="feed_community_comment-<%= feed_community_comment.id %>">
+  <div class="title">
+    <span><%= link_to truncate(feed_community_comment.community_topic.title, length: 50),
+                                    community_community_topic_path(feed_community_comment.community,
+                                    feed_community_comment.community_topic) %></span>
+  </div>
+  <div class="content">
+    <%= truncate(feed_community_comment.content, length: 75) %>
+  </div>
+  <dev class="timestamp">
+    <%= show_mini_thumb(feed_community_comment.user) %>
+    <%= link_to feed_community_comment.user.name, feed_community_comment.user %>
+    <% if feed_community_comment.updated_at  < 1.days.ago %>
+      <%= feed_community_comment.updated_at.to_s(:date) %>
+    <% else %>
+      <%= feed_community_comment.updated_at.to_s(:time) %>
+    <% end %>
+  </dev>
+</li>

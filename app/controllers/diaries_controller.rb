@@ -1,6 +1,6 @@
 class DiariesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def new
     @diary = Diary.new
@@ -10,9 +10,9 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
       flash[:success] = "Diary created!"
-      redirect_to root_url
+      redirect_to @diary
     else
-      # render 'static_pages/home'
+      redirect_to 'static_pages/home'
     end
   end
 
@@ -24,6 +24,15 @@ class DiariesController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    if @diary.update_attributes(diary_params)
+      flash[:success] = "Diary Update"
+      redirect_to @diary
+    else
+      render 'edit'
+    end
   end
 
   def destroy

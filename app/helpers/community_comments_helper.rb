@@ -1,0 +1,2 @@
+module CommunityCommentsHelper
+end

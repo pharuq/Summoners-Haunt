@@ -1,0 +1,33 @@
+<% provide(:title, 'コミュニティ作成') %>
+<h1>コミュニティ作成</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@community)  do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :content %>
+      <%= f.text_area :content, class: 'form-control' %>
+
+      <%= f.submit "投稿", class: "btn btn-primary submit" %>
+
+      <%= f.label :picture, "トップ画像" %>
+      <span class="picture">
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class:'input_picture' %>
+      </span>
+
+      <div id="crop_area_box">
+        <img id="crop_image" src="#" class="img-responsive hidden"/>
+      </div>
+
+      <%= hidden_field :community, :image_w, id: 'image_w' %>
+      <%= hidden_field :community, :image_h, id: 'image_h' %>
+      <%= hidden_field :community, :image_x, id: 'image_x' %>
+      <%= hidden_field :community, :image_y, id: 'image_y' %>
+
+    <% end %>
+  </div>
+</div>

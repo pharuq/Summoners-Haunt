@@ -1,0 +1,18 @@
+<div class="panel panel-warning sidebar_user_communities">
+  <div class="panel-heading">
+    <h3 class="panel-title">コミュニティ</h3>
+  </div>
+  <div class="panel-body">
+    <% @user.belong_communities.each_with_index do |community,count| %>
+      <% break if count == MAX_SHOW_FRIENDS %>
+      <dev class="sidebar_thumbs">
+        <%= show_middle_thumb(community) %>
+        <%=link_to truncate(community.name, length: 20), community %>
+      </dev>
+    <% end %>
+
+    <dev class="sidebar_index_communities">
+      <%= link_to "コミュニティ一覧（#{@user.belong_communities.count}）", communities_user_path(@user) %>
+    </dev>
+  </div>
+</div>

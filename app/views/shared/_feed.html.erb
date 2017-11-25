@@ -1,8 +1,6 @@
 <% if @diaries.any? %>
   <ol class="diaries">
-    <% @diaries.each_with_index do |diary,count| %>
-      <% break if count == MAX_SHOW_FEED %>
-      <%= render diary %>
-    <% end %>
+    <%= render @diaries %>
   </ol>
+  <%= will_paginate @diaries, :param_name => 'diaries' %>
 <% end %>

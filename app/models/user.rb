@@ -21,7 +21,14 @@ class User < ApplicationRecord
   has_many :passive_friends, through: :passive_friendships, source: :from_user
   has_many :active_pending_friends, through: :active_pending_friendships, source: :to_user
   has_many :passive_pending_friends, through: :passive_pending_friendships, source: :from_user
+  has_many :communities, dependent: :destroy
+  has_many :communityships, dependent: :destroy
+  has_many :belong_communities, through: :communityships, source: :community
+  has_many :community_comments, dependent: :destroy
+
   attr_accessor :remember_token, :activation_token, :reset_token
+    # crop用の仮想attribute
+  attr_accessor :image_x, :image_y, :image_w, :image_h
   before_save :downcase_email
   before_create :create_activation_digest
   validates :name, presence: true, length: {maximum: 50}
@@ -103,6 +110,11 @@ class User < ApplicationRecord
                       OR user_id = :user_id", user_id: id, true: true)
   end
 
+  # ユーザーのコミュニティトピックフィードを返す
+  def feed_topics
+    CommunityComment.joins(:community).merge( Community.where(id: self.belong_communities) )
+  end
+
   # ユーザーに友達申請を送る
   def follow(other_user)
     active_pending_friendships.create(to_user_id: other_user.id)
@@ -158,18 +170,11 @@ class User < ApplicationRecord
                           AND to_user_id = :user_id)", user_id: id, other_id: other_user.to_i)
   end
 
-  def self.search(search)
-    if search
-      User.where(['name LIKE ?
-                          AND role LIKE ?
-                          AND profile LIKE ?',
-                          "%#{search[:name]}%",
-                          "%#{search[:role]}%",
-                          "%#{search[:profile]}%"])
-    else
-      User.all
-    end
+  # 現在のコミュニティに属していればtrueを返す
+  def belong_communities?(community)
+    belong_communities.include?(community)
   end
+
 
   private
 

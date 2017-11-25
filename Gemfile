@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
 gem 'faker'
 gem 'carrierwave'
@@ -26,6 +27,8 @@ gem 'mini_magick'
 gem 'fog'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'ransack'
+gem 'cropper-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

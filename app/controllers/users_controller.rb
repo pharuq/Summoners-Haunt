@@ -4,13 +4,9 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy]
 
-  def index
-    @users = User.paginate(page: params[:page])
-  end
-
   def show
     @user = User.find(params[:id])
-    @diaries = @user.diaries
+    @diaries = @user.diaries.paginate(page: params[:page], :per_page => 5)
   end
 
   def new
@@ -49,7 +45,13 @@ class UsersController < ApplicationController
   def friends
     @user  = User.find(params[:id])
     @users = @user.friends.paginate(page: params[:page], :per_page => 20)
-    render 'show_friends'
+    render 'user_friends'
+  end
+
+  def communities
+    @user  = User.find(params[:id])
+    @communities = @user.belong_communities.paginate(page: params[:page], :per_page => 20)
+    render 'user_communities'
   end
 
   def feed
@@ -66,14 +68,20 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = User.search(params[:search])
+    @q = User.search(search_params)
+    @users = @q.result.where.not(id: @user.id)
   end
-
 
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :role, :profile, :password, :password_confirmation, :picture)
+      params.require(:user).permit(:name, :email, :role, :profile, :password,
+                                      :password_confirmation,
+                                      :image_x, :image_y, :image_w, :image_h, :picture)
+    end
+
+    def search_params
+      params.fetch(:q, {}).permit(:name_cont, :role_cont, :profile_cont)
     end
 
     # beforeアクション

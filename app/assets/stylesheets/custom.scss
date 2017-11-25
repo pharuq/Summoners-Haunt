@@ -12,19 +12,18 @@ $gray-medium-light: #eaeaea;
 }
 
 /* universal */
-
 body {
   padding-top: 60px;
+  background: url(/top_image2.jpg) no-repeat fixed center;
+  background-size:cover;
+  // background-color: #999966;
 }
-
 section {
   overflow: auto;
 }
-
 textarea {
   resize: vertical;
 }
-
 .center {
   text-align: center;
   h1 {
@@ -32,12 +31,27 @@ textarea {
   }
 }
 
+/*Bootstrapの設定上書き*/
+.container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.col-md-3, .col-md-6 {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.jumbotron {
+  background: url(/top_image.jpg) center;
+}
+.panel-heading {
+  // background: url(/top_image.jpg) no-repeat fixed center;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
-
 h1 {
   font-size: 3em;
   text-indent:-2em;
@@ -45,33 +59,33 @@ h1 {
   margin-bottom: 30px;
   text-align: center;
 }
-
 h2 {
   font-size: 1.2em;
   text-indent:-1em;
   letter-spacing: -1px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   text-align: center;
   font-weight: normal;
   color: $gray-light;
 }
-
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  margin: 0;
 }
 
 /* sidebar */
 
 aside {
   section.user_info {
-    margin-top: 20px;
+    // margin-top: 20px;
   }
   section {
     padding: 10px 0;
     margin-top: 20px;
     &:first-child {
       border: 0;
+      // margin-top: 30px;
       padding-top: 0;
     }
     span {
@@ -86,46 +100,69 @@ aside {
       margin-bottom: 3px;
       margin-top: 0px;
     }
+    .user_name {
+      margin-top: 7px;
+      margin-bottom: 0;
+      padding-bottom: 15px;
+      // border-bottom: 1px solid #CCCCCC;
+    }
   }
 }
 
-.stats {
-  overflow: auto;
-  margin-top: 0;
+.user-info-icon-wrap{
+  margin: 0;
   padding: 0;
-  a {
-    float: left;
-    padding: 0 10px;
-    border-left: 1px solid $gray-lighter;
-    color: gray;
-    &:first-child {
-      padding-left: 0;
-      border: 0;
-    }
-    &:hover {
-      text-decoration: none;
-      color: blue;
-    }
+  letter-spacing: -1em;
+  border-top: 1px solid #CCCCCC;
+  // li:first-child {
+  //   border-right: 1px solid #CCCCCC;
+  // }
+  .border-right {
+    border-right: 1px solid #CCCCCC;
   }
-  strong {
-    display: block;
+  .follow-accept-icon {
+    border-bottom: 1px solid #CCCCCC;
   }
 }
 
-.user_friends {
+#follow_form, .user-info-icon {
+  display: inline-block;
+  letter-spacing: normal;
+  padding-top: 5px;
+  width: 50%;
+}
+
+.change-submit {
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0);
+  border: 0;
+}
+
+.sidebar_user_friends, .sidebar_user_communities {
   overflow: auto;
   margin-top: 10px;
-  .thumb {
-    margin: 0 0 3px 1px;
-    border-radius: 50%;
-    padding: 0;
-  }
-  .friends_show {
+  // .thumb {
+  //   display: block;
+  //   margin: 0 0 3px 1px;
+  //   border-radius: 50%;
+  //   padding: 0;
+  // }
+  .sidebar_index_friends, .sidebar_index_communities {
+    display: block;
     text-align: right;
   }
 }
 .users.follow {
   padding: 0;
+}
+
+.sidebar_thumbs {
+  display: inline-block;
+  width: 32%;
+  padding-bottom: 10px;
+  vertical-align: top;
+  text-align: center;
 }
 
 /* forms */
@@ -136,11 +173,9 @@ input, textarea, select, .uneditable-input {
   margin-bottom: 15px;
   @include box_sizing;
 }
-
 input {
   height: auto !important;
 }
-
 #error_explanation {
   color: red;
   ul {
@@ -148,14 +183,12 @@ input {
     margin: 0 0 30px 0;
   }
 }
-
 .field_with_errors {
   @extend .has-error;
   .form-control {
     color: $state-danger-text;
   }
 }
-
 .checkbox {
   margin-top: -10px;
   margin-bottom: 10px;
@@ -164,18 +197,15 @@ input {
     font-weight: normal;
   }
 }
-
 #session_remember_me {
   width: auto;
   margin-left: 0;
 }
-
 .shared-with {
   width: 30px;
 }
 
 /* header */
-
 #logo {
   float: left;
   margin-right: 10px;
@@ -192,7 +222,6 @@ input {
 }
 
 /* footer */
-
 footer {
   margin-top: 45px;
   padding-top: 5px;
@@ -217,40 +246,122 @@ footer {
   }
 }
 
-/* Users index */
+// --------------------------------------------------------------------------- //
 
-.users {
+
+/* Users index */
+/* communities index */
+
+.users, .communities {
   list-style: none;
-  margin: 0;
+  width: 100%;
+  margin: 0px;
   li {
+    display: inline-block;
+    width: 49%;
     overflow: auto;
-    padding: 10px 0;
+    padding: 10px 10px 10px 0;
+    margin-right: 10px;
+    border-right: 1px solid $gray-lighter;
     border-bottom: 1px solid $gray-lighter;
+  }
+  li:nth-child(even) {
+    margin-right: 0;
+  }
+  .icon {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+    .thumb {
+      border-radius: 50%;
+    }
+  }
+  .name {
+    margin-top: 150px;
+    // 効いてない。要修正
+  }
+  .profile, .content {
+    display: block;
   }
 }
 
-/* diaries */
+/* Profile */
+.profile-table {
+	border-spacing: 0;
+	width: 100%;
+  th, td {
+  	padding: 10px;
+  	background: #fff;
+  	border-bottom: 1px solid #ccc;
+  	border-right: 1px solid #ccc;
+  }
+  th {
+  	padding: 7px 10px;
+  	background:#e3dcd5;
+  	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  	color: #69655c;
+  }
+  .profile-table-header {
+    width: 25%;
+  }
+  .profile-table-content {
+    width: 75%;
+  }
 
-.diaries {
+  th:last-child, td:last-child {
+  	border-right:none;
+  }
+
+  tr:last-child td {
+  	 border-bottom: none;
+  }
+}
+.profile-table-wrapper {
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+		border-radius: 6px;
+    margin-bottom: 20px;
+	box-shadow: 0 1px 1px #ccc;
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+
+/* diaries */
+/* diary_comments */
+/* community_topics */
+/* feed_community_comments */
+
+.diaries, .diary_comments, .community_topics, .feed_community_comments {
   list-style: none;
   padding: 0;
   li {
+    overflow: hidden;
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-  li:last-child {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
     border-bottom: 1px solid #e8e8e8;
   }
   .title {
+    display: block;
     text-align: left;
     float: left;
+  }
+  .content {
+    display: block;
   }
   .timestamp {
     color: $gray-light;
     float: right;
   }
+}
+
+.diary-date {
+  margin-top: 7px;
+  font-size: 0.9em;
+  color: $gray-light;
+  text-align: right;
+}
+
+.delete_icon {
+  vertical-align: middle;
 }
 
 .read_more {
@@ -271,6 +382,21 @@ span.picture {
   display: block;
 }
 
+/* rss */
+
+.rss {
+
+}
+
+.rss_feed {
+  list-style: none;
+  padding: 0;
+  li {
+    overflow: hidden;
+    padding: 10px 0;
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
 
 /* miscellaneous */
 

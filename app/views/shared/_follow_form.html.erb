@@ -1,4 +1,4 @@
-<div id="follow_form">
+<li id="follow_form" class="border-right">
   <% if current_user.friends?(@user) || current_user.active_pending_friends?(@user) %>
     <%= render 'shared/unfollow' %>
   <% elsif current_user.passive_pending_friends?(@user) %>
@@ -6,4 +6,4 @@
   <% else %>
     <%= render 'shared/follow' %>
   <% end %>
-</div>
+</li>

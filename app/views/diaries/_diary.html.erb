@@ -1,8 +1,18 @@
 <li id="diary-<%= diary.id %>">
-  <span class="title"><%= link_to diary.title, diary %></span>
+  <div class="title">
+    <span><%= link_to truncate(diary.title, length: 50), diary %></span>
     <%= image_tag('/key.jpg') if diary.shared_with == SHARED_WITH_FRIENDS_ONLY %>
+  </div>
+  <div class="content">
+    <%= truncate(diary.content, length: 75) %>
+  </div>
   <dev class="timestamp">
-    <%= link_to diary.user.name, diary.user %> Posted
-    <%= time_ago_in_words(diary.created_at) %> ago.
+    <%= show_mini_thumb(diary.user) %>
+    <%= link_to diary.user.name, diary.user %>
+    <% if diary.updated_at  < 1.days.ago %>
+      <%= diary.updated_at.to_s(:date) %>
+    <% else %>
+      <%= diary.updated_at.to_s(:time) %>
+    <% end %>
   </dev>
 </li>

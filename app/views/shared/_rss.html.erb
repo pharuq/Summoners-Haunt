@@ -1,0 +1,7 @@
+<div class="rss_feed">
+  <% @rss.each do |item| %>
+      <li>
+        <%= link_to(item[:title], item[:url], :target=>["_blank"] ) %>
+      </li>
+    <% end %>
+  </div>

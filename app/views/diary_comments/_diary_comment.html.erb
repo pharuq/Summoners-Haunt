@@ -1,11 +1,13 @@
 <li id="diary_comment-<%= diary_comment.id %>">
-  <span class="title"><%= diary_comment.user.name %><br></span>
-    <span class="title"><%= diary_comment.content %></span>
+  <span class="content"><%= diary_comment.content %></span>
   <dev class="timestamp">
-    Posted <%= time_ago_in_words(diary_comment.created_at) %> ago.
+    <%= show_mini_thumb(diary_comment.user) %>
+    <%= link_to diary_comment.user.name, diary_comment.user %>
+    <%= diary_comment.updated_at.to_s(:datetime) %>
+
     <% if current_user?(diary_comment.user) %>
-      <%= link_to "delete", diary_comment, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+      <%= link_to image_tag('/delete_comment_icon.png', alt: "delete", class: "delete_icon"), diary_comment,
+                    method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
   </dev>
 </li>

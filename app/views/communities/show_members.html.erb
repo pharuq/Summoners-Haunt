@@ -2,15 +2,15 @@
 <div class="row">
   <aside class="col-md-3">
     <section>
-      <%= render 'shared/user_info' %>
+      <%= render 'community_info' %>
     </section>
   </aside>
-  <div class="col-md-6">
+  <div class="col-md-9">
     <h3><%= @title %></h3>
     <% if @users.any? %>
-      <ul class="users follow">
+      <div class="users">
         <%= render @users %>
-      </ul>
+      </div>
       <%= will_paginate @users %>
     <% end %>
   </div>

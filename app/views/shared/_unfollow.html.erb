@@ -1,6 +1,9 @@
 <%= form_for(current_user.get_friendship_id(@user).first,
                                                     html: { method: :delete },
                                                     remote: true) do |f| %>
-  <div><%= hidden_field_tag :to_user_id, @user.id %></div>
-  <%= f.submit "友達解除", class: "btn", data: { confirm: "破棄しますか？" } %>
+  <%= hidden_field_tag :to_user_id, @user.id %>
+  <%# f.submit "友達解除", class: "btn", data: { confirm: "破棄しますか？" } %>
+  <%= button_tag type: :submit, class: "change-submit", data: { confirm: "友達を解除しますか？" } do %>
+    <%= image_tag "/frined_sub_icon.png", alt: "sub_friend", class: "center-block" %>
+  <% end %>
 <% end %>

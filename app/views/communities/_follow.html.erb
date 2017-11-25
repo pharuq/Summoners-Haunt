@@ -1,0 +1,4 @@
+<%= form_for(@community.communityships.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :community_id, @community.id %></div>
+  <%= f.submit "入会する", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,6 @@
+<% if @feed_community_comments.any? %>
+  <ol class="feed_community_comments">
+    <%= render partial: "community_comments/feed_community_comment", collection: @feed_community_comments %>
+  </ol>
+  <%= will_paginate @feed_community_comments, :param_name => 'feed_community_comments'  %>
+<% end %>

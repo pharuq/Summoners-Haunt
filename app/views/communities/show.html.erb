@@ -1,0 +1,48 @@
+<% provide(:title, @community.name) %>
+<div class="row">
+  <aside class="col-md-3">
+    <section>
+      <%= render 'community_info' %>
+    </section>
+  </aside>
+  <div class="col-md-6">
+    <div class="profile-table-wrapper">
+      <table class="profile-table">
+        <tbody>
+          <tr>
+            <th colspan="2">コミュニティ情報</th>
+          </tr>
+          <tr>
+            <td class="profile-table-header">名前</td>
+            <td class="profile-table-content"><%= @community.name %></td>
+          </tr>
+          <tr>
+            <td>代表</td>
+            <td><%= @community.user.name %></td>
+          </tr>
+          <tr>
+            <td>内容</td>
+            <td><%= simple_format(@community.content) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">トピック一覧</h3>
+      </div>
+      <div class="panel-body">
+        <% if @community_topics.any? %>
+          <ul class="community_topics">
+            <%= render @community_topics %>
+          </ul>
+          <%= will_paginate @community_topics %>
+        <% end %>
+        <% if @user.belong_communities?(@community) %>
+          <%= link_to "トピックを作成する", new_community_community_topic_path(@community) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

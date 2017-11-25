@@ -10,7 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006141253) do
+ActiveRecord::Schema.define(version: 20171119054217) do
+
+  create_table "communities", force: :cascade do |t|
+    t.string "name"
+    t.text "content"
+    t.string "picture"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_communities_on_user_id"
+  end
+
+  create_table "community_comments", force: :cascade do |t|
+    t.integer "community_topic_id"
+    t.integer "user_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "community_id"
+    t.index ["community_id"], name: "index_community_comments_on_community_id"
+    t.index ["community_topic_id", "created_at"], name: "index_community_comments_on_community_topic_id_and_created_at"
+    t.index ["community_topic_id"], name: "index_community_comments_on_community_topic_id"
+    t.index ["user_id"], name: "index_community_comments_on_user_id"
+  end
+
+  create_table "community_topics", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "user_id"
+    t.integer "community_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_community_topics_on_community_id"
+    t.index ["user_id"], name: "index_community_topics_on_user_id"
+  end
+
+  create_table "communityships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "community_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_communityships_on_community_id"
+    t.index ["user_id", "community_id"], name: "index_communityships_on_user_id_and_community_id", unique: true
+    t.index ["user_id"], name: "index_communityships_on_user_id"
+  end
 
   create_table "diaries", force: :cascade do |t|
     t.string "title"

@@ -1,0 +1,42 @@
+<% provide(:title, @community.name) %>
+<div class="row">
+  <aside class="col-md-3">
+    <section>
+      <%= render 'communities/community_info' %>
+    </section>
+  </aside>
+  <div class="col-md-9">
+    <h1><%= @community_topic.title %></h1>
+
+    <% if current_user?(@community_topic.user) %>
+      <%= link_to "delete", community_community_topic_path(community_id: @community, id: @community_topic), method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+
+    <p>投稿者：<%= @community_topic.user.name %></p>
+    <p>内容　：<%= @community_topic.content %></p>
+
+    <% if @community_comments.any? %>
+      <ul class="community_comments">
+        <%= render @community_comments %>
+      </ul>
+
+    <% end %>
+
+    <%= form_for(@community_comment,
+       url: community_community_topic_community_comments_path(community_id: @community,
+                                                                                                    community_topic_id: @community_topic))  do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= hidden_field :community_comment, :community_id, value: @community.id %>
+      <%= hidden_field :community_comment, :community_topic_id, value: @community_topic.id %>
+
+      <%= f.label :content %>
+      <%= f.text_area :content, class: 'form-control' %>
+
+      <%= f.submit "コメントする", class: "btn btn-primary" %>
+
+    <% end %>
+
+  </div>
+</div>
