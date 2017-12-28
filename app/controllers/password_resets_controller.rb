@@ -11,10 +11,10 @@ before_action :check_expiration, only: [:edit, :update]
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      flash[:info] = "Email sent with password reset instructions"
+      flash[:info] = "パスワードリセットのメールを送信しました。"
       redirect_to root_url
     else
-      flash.now[:danger] = "Email address not found"
+      flash.now[:danger] = "メールアドレスが存在しません。"
       render 'new'
     end
   end
@@ -28,7 +28,7 @@ before_action :check_expiration, only: [:edit, :update]
       render 'edit'
     elsif @user.update_attributes(user_params)
       log_in @user
-      flash[:success] = "Password has been reset."
+      flash[:success] = "パスワードがリセットされました。"
       redirect_to @user
     else
       render 'edit'

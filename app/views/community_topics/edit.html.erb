@@ -1,2 +1,33 @@
-<h1>CommunityTopics#edit</h1>
-<p>Find me in app/views/community_topics/edit.html.erb</p>
+<% provide(:title, 'トピック編集') %>
+<div class="row">
+  <aside class="col-md-3">
+    <section>
+      <%= render 'communities/community_info' %>
+    </section>
+  </aside>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">トピック編集</h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(@community_topic, url: community_community_topic_path)  do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+
+          <%= hidden_field :community_topic, :community_id, value: @community.id %>
+          <%= hidden_field :community_topic, :user_id, value: current_user.id %>
+
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title, class: 'form-control' %>
+
+          <%= f.label :content, "内容" %>
+          <%= f.text_area :content, rows: TEXT_AREA_BIG_ROW, class: 'form-control' %>
+
+          <%= f.submit "変更", class: "btn btn-primary" %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

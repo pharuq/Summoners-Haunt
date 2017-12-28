@@ -1,6 +1,4 @@
-<% provide(:title, '編集画面') %>
-<h1>編集画面</h1>
-
+<% provide(:title, 'コミュニティ編集') %>
 <div class="row">
   <aside class="col-md-3">
     <section>
@@ -8,42 +6,48 @@
     </section>
   </aside>
   <div class="col-md-6">
-    <%= form_for(@community)  do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :content, "説明" %>
-      <%= f.text_area :content, class: 'form-control' %>
-
-      <%= check_box_tag :authority_transfer, class: "checkbox inline" %>
-      <%= label_tag :authority_transfer, "コミュニティ権限を移譲する"  %>
-
-      <div class="transfer_user">
-        <%= f.label :user_id, "ユーザーを選択" %>
-        <%= f.collection_select :user_id, @community.community_members,
-                          :id, :name %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">コミュニティ編集</h3>
       </div>
+      <div class="panel-body">
+        <%= form_for(@community)  do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.submit "投稿", class: "btn btn-primary submit" %>
+          <%= f.label :content, "説明" %>
+          <%= f.text_area :content, rows: TEXT_AREA_BIG_ROW, class: 'form-control' %>
 
-      <%= f.label :picture, "トップ画像" %>
-      <span class="picture">
-        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class:'input_picture' %>
-      </span>
+          <%= f.submit "投稿", class: "btn btn-primary submit" %>
 
-      <div id="crop_area_box">
-        <img id="crop_image" src="#" class="img-responsive hidden"/>
+          <%= f.label :picture, "トップ画像" %>
+          <span class="picture">
+            <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class:'input_picture' %>
+          </span>
+
+          <div id="crop_area_box">
+            <img id="crop_image" src="#" class="img-responsive hidden"/>
+          </div>
+
+          <%= hidden_field :community, :image_w, id: 'image_w' %>
+          <%= hidden_field :community, :image_h, id: 'image_h' %>
+          <%= hidden_field :community, :image_x, id: 'image_x' %>
+          <%= hidden_field :community, :image_y, id: 'image_y' %>
+
+        <%= check_box_tag :authority_transfer, class: "checkbox inline" %>
+        <%= label_tag :authority_transfer, "コミュニティ権限を移譲する"  %>
+
+        <div class="transfer_user">
+          <%= f.label :user_id, "ユーザーを選択してください" %>
+          <%= f.collection_select :user_id, @community.community_members,
+                            :id, :name %>
+        </div>
+      <% end %>
+
+        <%= form_for(@community, html: { method: :delete }) do |f| %>
+          <%= f.submit "コミュニティを削除する", class: "btn", data: { confirm: "コミュニティを削除しますか？" } %>
+        <% end %>
       </div>
-
-      <%= hidden_field :community, :image_w, id: 'image_w' %>
-      <%= hidden_field :community, :image_h, id: 'image_h' %>
-      <%= hidden_field :community, :image_x, id: 'image_x' %>
-      <%= hidden_field :community, :image_y, id: 'image_y' %>
-
-    <% end %>
-
-    <%= form_for(@community, html: { method: :delete }) do |f| %>
-      <%= f.submit "コミュニティを削除する", class: "btn", data: { confirm: "コミュニティを削除しますか？" } %>
-    <% end %>
+    </div>
   </div>
 </div>
 

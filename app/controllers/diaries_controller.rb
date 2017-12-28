@@ -3,16 +3,20 @@ class DiariesController < ApplicationController
   before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def new
+    @user = current_user
     @diary = Diary.new
   end
 
   def create
+    @user = current_user
+    logger.debug "出力したいデバッグ情報"
+    logger.debug diary_params
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      flash[:success] = "Diary created!"
+      flash[:success] = "日記を作成しました。"
       redirect_to @diary
     else
-      redirect_to 'static_pages/home'
+      render 'new'
     end
   end
 
@@ -20,15 +24,16 @@ class DiariesController < ApplicationController
     @diary = Diary.find(params[:id])
     @user = @diary.user
     @diary_comment = current_user.diary_comments.build
-    @diary_comments = @diary.diary_comments
+    @diary_comments = @diary.diary_comments.paginate(page: params[:page], :per_page => 7)
   end
 
   def edit
+    @user = current_user
   end
 
   def update
     if @diary.update_attributes(diary_params)
-      flash[:success] = "Diary Update"
+      flash[:success] = "日記を更新しました。"
       redirect_to @diary
     else
       render 'edit'
@@ -37,14 +42,14 @@ class DiariesController < ApplicationController
 
   def destroy
     @diary.destroy
-    flash[:success] = "Diary deleted"
-    redirect_to request.referrer || root_url
+    flash[:success] = "日記を削除しました。"
+    redirect_to root_url
   end
 
   private
 
   def diary_params
-    params.require(:diary).permit(:title, :content, :shared_with)
+    params.require(:diary).permit(:title, :content, :shared_with, {pictures: []})
   end
 
   def correct_user

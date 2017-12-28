@@ -1,0 +1,28 @@
+<% provide(:title, 'メッセージ') %>
+<div class="row">
+  <aside class="col-md-3">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+  </aside>
+
+  <div class="col-md-6">
+    <ul class="messages">
+      <%= render @messages %>
+    </ul>
+    <%= will_paginate @messages %>
+  </div>
+  <div class="col-md-3">
+    <%= form_for(@message, url: user_messages_path(user_id: params[:id]))  do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= hidden_field :message, :from_user_id, value: current_user.id %>
+      <%= hidden_field :message, :to_user_id, value: @user.id %>
+
+      <%= f.text_area :content, rows: TEXT_AREA_ROW, class: 'form-control message-input' %>
+
+      <%= f.submit "送信", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

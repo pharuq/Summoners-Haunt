@@ -6,15 +6,11 @@
   <div class="content">
     <%= truncate(community_topic.content, length: 75) %>
   </div>
-  <dev class="timestamp">
-    <% if community_topic.user.picture? %>
-      <%= link_to image_tag(community_topic.user.picture.url(:mini_thumb),
-                    alt: community_topic.user.name, class: "mini_thumb"), community_topic.user %>
-    <% else %>
-      <%=link_to image_tag('/m_e_others_480_24x24.jpg',
-                    alt: community_topic.user.name, class: "mini_thumb"), community_topic.user %>
-    <% end %>
-    <%= link_to community_topic.user.name, community_topic.user %> Posted
-    <%= time_ago_in_words(community_topic.created_at) %> ago.
-  </dev>
+  <div class="mini_thumb">
+    <%= show_mini_thumb(community_topic.user) %>
+    <%= link_to community_topic.user.name, community_topic.user %>
+    <span class="timestamp">
+      <%= community_topic.updated_at.to_s(:datetime) %>
+    </span>
+  </div>
 </li>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119054217) do
+ActiveRecord::Schema.define(version: 20171228063119) do
 
   create_table "communities", force: :cascade do |t|
     t.string "name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20171119054217) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "shared_with", default: 0
+    t.string "pictures"
     t.index ["user_id", "created_at"], name: "index_diaries_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 20171119054217) do
     t.integer "to_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "read", default: false
     t.index ["from_user_id", "to_user_id", "created_at"], name: "index_messages_on_from_user_id_and_to_user_id_and_created_at"
     t.index ["from_user_id"], name: "index_messages_on_from_user_id"
     t.index ["to_user_id"], name: "index_messages_on_to_user_id"

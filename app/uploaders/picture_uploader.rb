@@ -42,11 +42,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   private
 
     def crop
-      p "TEST1"
-      p  "model.image_x:", model.image_x, "model.image_y:", model.image_y,
-          "model.image_w:", model.image_w,"model.image_h:", model.image_h
       return unless [model.image_x, model.image_y, model.image_w, model.image_h].all?
-      p "TEST2"
       manipulate! do |img|
         crop_x = model.image_x.to_i
         crop_y = model.image_y.to_i
@@ -54,8 +50,6 @@ class PictureUploader < CarrierWave::Uploader::Base
         crop_h = model.image_h.to_i
         img.crop "#{crop_w}x#{crop_h}+#{crop_x}+#{crop_y}"
         img = yield(img) if block_given?
-        p "TEST3"
-        p  "crop_x:", crop_x, "crop_y:", crop_y,"crop_w:", crop_w,"crop_h:", crop_h
         img
       end
     end

@@ -6,13 +6,15 @@
   <div class="content">
     <%= truncate(diary.content, length: 75) %>
   </div>
-  <dev class="timestamp">
+  <div class="mini_thumb">
     <%= show_mini_thumb(diary.user) %>
     <%= link_to diary.user.name, diary.user %>
-    <% if diary.updated_at  < 1.days.ago %>
-      <%= diary.updated_at.to_s(:date) %>
-    <% else %>
-      <%= diary.updated_at.to_s(:time) %>
-    <% end %>
-  </dev>
+    <span class="timestamp">
+      <% if diary.updated_at  < 1.days.ago %>
+        <%= diary.updated_at.to_s(:date) %>
+      <% else %>
+        <%= diary.updated_at.to_s(:time) %>
+      <% end %>
+    </span>
+  </div>
 </li>

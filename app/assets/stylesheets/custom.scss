@@ -14,6 +14,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 body {
   padding-top: 60px;
+  word-wrap: break-word;
   background: url(/top_image2.jpg) no-repeat fixed center;
   background-size:cover;
   // background-color: #999966;
@@ -29,6 +30,9 @@ textarea {
   h1 {
     margin-bottom: 10px;
   }
+}
+ul, ol {
+  padding: 0;
 }
 
 /*Bootstrapの設定上書き*/
@@ -46,6 +50,10 @@ textarea {
 .panel-heading {
   // background: url(/top_image.jpg) no-repeat fixed center;
 }
+.popover {
+  z-index: auto;
+}
+
 
 /* typography */
 
@@ -100,7 +108,7 @@ aside {
       margin-bottom: 3px;
       margin-top: 0px;
     }
-    .user_name {
+    .user_name, .community_name {
       margin-top: 7px;
       margin-bottom: 0;
       padding-bottom: 15px;
@@ -109,7 +117,7 @@ aside {
   }
 }
 
-.user-info-icon-wrap{
+.user-info-icon-wrap, .community-info-icon-wrap{
   margin: 0;
   padding: 0;
   letter-spacing: -1em;
@@ -125,7 +133,7 @@ aside {
   }
 }
 
-#follow_form, .user-info-icon {
+#follow_form, .user-info-icon, .community-info-icon {
   display: inline-block;
   letter-spacing: normal;
   padding-top: 5px;
@@ -139,19 +147,9 @@ aside {
   border: 0;
 }
 
-.sidebar_user_friends, .sidebar_user_communities {
-  overflow: auto;
-  margin-top: 10px;
-  // .thumb {
-  //   display: block;
-  //   margin: 0 0 3px 1px;
-  //   border-radius: 50%;
-  //   padding: 0;
-  // }
-  .sidebar_index_friends, .sidebar_index_communities {
-    display: block;
-    text-align: right;
-  }
+.sidebar_index_friends, .sidebar_index_communities, .sidebar_index_members {
+  display: block;
+  text-align: right;
 }
 .users.follow {
   padding: 0;
@@ -175,6 +173,9 @@ input, textarea, select, .uneditable-input {
 }
 input {
   height: auto !important;
+}
+input[type=checkbox],input[type=radio] {
+  width: 20px;
 }
 #error_explanation {
   color: red;
@@ -201,8 +202,8 @@ input {
   width: auto;
   margin-left: 0;
 }
-.shared-with {
-  width: 30px;
+.submit {
+  margin-bottom: 10px;
 }
 
 /* header */
@@ -229,9 +230,9 @@ footer {
   color: $gray-light;
   a {
     color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
+    // &:hover {
+    //   color: $gray-darker;
+    // }
   }
   small {
     float: left;
@@ -240,7 +241,7 @@ footer {
     float: right;
     list-style: none;
     li {
-      float: left;
+      // float: left;
       margin-left: 15px;
     }
   }
@@ -272,23 +273,80 @@ footer {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
-    .thumb {
-      border-radius: 50%;
-    }
   }
   .name {
-    margin-top: 150px;
-    // 効いてない。要修正
   }
   .profile, .content {
-    display: block;
   }
+}
+
+/* messages index */
+.message_index {
+  list-style: none;
+  width: 100%;
+  margin: 0px;
+  li {
+    display: block;
+    overflow: auto;
+    padding: 10px 10px 10px 0;
+    margin-right: 10px;
+    border-bottom: 1px solid $gray-lighter;
+  }
+  .icon {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+  .name {
+  }
+  .content {
+  }
+}
+
+/* messages */
+.messages {
+  list-style: none;
+  width: 100%;
+  margin: 0px;
+  li {
+    display: block;
+    overflow: auto;
+    padding: 10px 10px 10px 0;
+    margin-right: 10px;
+  }
+  .left-position {
+    position: relative;
+    max-width: 100%;
+    background: #99CC66;
+    margin-left: 36px;
+    .arrow {
+      background: #99CC66;
+    }
+  }
+  .right-position {
+    position: relative;
+    max-width: 100%;
+    margin-right: 36px;
+  }
+  .name {
+  }
+  .content {
+  }
+}
+.message-timestamp {
+  text-align: right;
+  font-size: 0.9em;
+  // color: $gray-light;
+}
+.message-input {
+  margin-top: 20px;
 }
 
 /* Profile */
 .profile-table {
-	border-spacing: 0;
+  table-layout: fixed;
 	width: 100%;
+	border-spacing: 0;
   th, td {
   	padding: 10px;
   	background: #fff;
@@ -307,11 +365,9 @@ footer {
   .profile-table-content {
     width: 75%;
   }
-
   th:last-child, td:last-child {
   	border-right:none;
   }
-
   tr:last-child td {
   	 border-bottom: none;
   }
@@ -331,7 +387,8 @@ footer {
 /* community_topics */
 /* feed_community_comments */
 
-.diaries, .diary_comments, .community_topics, .feed_community_comments {
+.diaries, .diary_comments,
+.community_topics, .community_comments, .feed_community_comments {
   list-style: none;
   padding: 0;
   li {
@@ -347,26 +404,19 @@ footer {
   .content {
     display: block;
   }
-  .timestamp {
-    color: $gray-light;
-    float: right;
-  }
 }
 
-.diary-date {
-  margin-top: 7px;
-  font-size: 0.9em;
-  color: $gray-light;
+.mini_thumb {
   text-align: right;
+  color: $gray-light;
+  .timestamp {
+    // margin-top: 7px;
+    font-size: 0.9em;
+  }
 }
 
 .delete_icon {
   vertical-align: middle;
-}
-
-.read_more {
-  display: block;
-  text-align: right;
 }
 
 span.picture {

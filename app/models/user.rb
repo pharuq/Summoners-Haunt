@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :image_x, :image_y, :image_w, :image_h     # crop用の仮想attribute
+  before_save :downcase_email
+  before_create :create_activation_digest
+
   has_many :diaries, dependent: :destroy
   has_many :diary_comments, dependent: :destroy
   has_many :active_friendships, -> { where activated: true },
@@ -26,19 +31,16 @@ class User < ApplicationRecord
   has_many :belong_communities, through: :communityships, source: :community
   has_many :community_comments, dependent: :destroy
 
-  attr_accessor :remember_token, :activation_token, :reset_token
-    # crop用の仮想attribute
-  attr_accessor :image_x, :image_y, :image_w, :image_h
-  before_save :downcase_email
-  before_create :create_activation_digest
-  validates :name, presence: true, length: {maximum: 50}
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  has_secure_password
+  mount_uploader :picture, PictureUploader
+
+  validates :name, presence: true, length: {maximum: 25}
   validates :email, presence: true, length: {maximum: 255},
                                                   format: { with: VALID_EMAIL_REGEX},
                                                   uniqueness: {case_sensitive: false}
-  has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  mount_uploader :picture, PictureUploader
+  validates :role, length: {maximum: 50}
+  validates :profile, length: {maximum: 4000}
   validate  :picture_size
 
   # 渡された文字列のハッシュ値を返す
@@ -167,7 +169,7 @@ class User < ApplicationRecord
     Message.where("(from_user_id = :user_id
                           AND to_user_id = :other_id) OR
                             (from_user_id = :other_id
-                          AND to_user_id = :user_id)", user_id: id, other_id: other_user.to_i)
+                          AND to_user_id = :user_id)", user_id: id, other_id: other_user)
   end
 
   # 現在のコミュニティに属していればtrueを返す

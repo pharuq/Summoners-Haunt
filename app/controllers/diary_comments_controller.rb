@@ -5,14 +5,17 @@ class DiaryCommentsController < ApplicationController
   def create
     @diary_comment = current_user.diary_comments.build(diary_comment_params)
     if @diary_comment.save
-      flash[:success] = "diary_comment created!"
+      flash[:success] = "コメントしました。"
       redirect_to request.referrer || root_url
+    else
+      flash[:danger] =  "コメントに失敗しました。"
+      redirect_to  request.referrer || root_url
     end
   end
 
   def destroy
     @diary_comment.destroy
-    flash[:success] = "Diary_comment deleted"
+    flash[:success] = "コメントを削除しました。"
     redirect_to request.referrer || root_url
   end
 

@@ -1,6 +1,8 @@
-<%= form_for(@community.communityships.find_by(user_id: @user),
+<%= form_for(@community.communityships.find_by(user_id: current_user),
                                                     html: { method: :delete },
                                                     remote: true) do |f| %>
   <div><%= hidden_field_tag :community_id, @community.id %></div>
-  <%= f.submit "退会する", class: "btn", data: { confirm: "退会しますか？" } %>
+  <%= button_tag type: :submit, class: "change-submit", data: { confirm: "コミュニティを退会しますか？" } do %>
+    <%= image_tag "/frined_sub_icon.png", alt: "sub_community", class: "center-block" %>
+  <% end %>
 <% end %>

@@ -1,0 +1,19 @@
+<% if message.from_user == current_user %>
+  <% who = "left" %>
+<% else %>
+  <% who = "right" %>
+<% end %>
+
+<li id="message-<%= message.id %>">
+  <div class="popover <%= who %> <%= who %>-position show">
+    <!-- <div class="arrow"></div> -->
+    <div class="popover-content">
+      <p>
+        <%= simple_format(message.content) %>
+      </p>
+      <div class="message-timestamp">
+        <%= message.created_at.to_s(:datetime) %>
+      </div>
+    </div>
+  </div>
+</li>

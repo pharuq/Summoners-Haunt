@@ -1,2 +1,16 @@
 <footer class="footer">
+  <small>
+    <ul>
+      <li><%= link_to "当サイトについて", about_path %></li>
+      <% if logged_in? %>
+        <li><%= link_to "退会する", leave_user_path(current_user) %></li>
+      <% end %>
+    </ul>
+  </small>
+  <nav>
+    <ul>
+      <li>公式サイト(JP)：<%= link_to 'https://jp.leagueoflegends.com/ja/',
+                            'https://jp.leagueoflegends.com/ja/', :target=>["_blank"]  %></li>
+    </ul>
+  </nav>
 </footer>

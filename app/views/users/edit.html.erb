@@ -1,44 +1,48 @@
-<% provide(:title, "Edit user") %>
-<h1>Update your profile</h1>
-
+<% provide(:title, "サモナー情報") %>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.label :role %>
-      <%= f.text_field :role, class: 'form-control' %>
-
-      <%= f.label :profile %>
-      <%= f.text_area :profile, class: 'form-control' %>
-
-      <%= f.submit "変更する", class: "btn btn-primary submit" %>
-
-      <span class="picture">
-        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class:'input_picture' %>
-      </span>
-
-      <div id="crop_area_box">
-        <img id="crop_image" src="#" class="img-responsive hidden"/>
+  <aside class="col-md-3">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+  </aside>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">サモナー情報</h3>
       </div>
+      <div class="panel-body">
+        <%= form_for(@user) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
 
-      <%= hidden_field :user, :image_w, id: 'image_w' %>
-      <%= hidden_field :user, :image_h, id: 'image_h' %>
-      <%= hidden_field :user, :image_x, id: 'image_x' %>
-      <%= hidden_field :user, :image_y, id: 'image_y' %>
-    <% end %>
+          <%= f.label :name, "名前" %>
+          <%= f.text_field :name, class: 'form-control' %>
 
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email, class: 'form-control' %>
+
+          <%= f.label :role, "ロール" %>
+          <%= f.text_field :role, class: 'form-control' %>
+
+          <%= f.label :profile, "プロフィール" %>
+          <%= f.text_area :profile, rows: TEXT_AREA_BIG_ROW, class: 'form-control' %>
+
+          <%= f.submit "変更する", class: "btn btn-primary submit" %>
+
+          <%= f.label :picture, "プロフィール画像" %>
+          <span class="picture">
+            <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'input_picture' %>
+          </span>
+
+          <div id="crop_area_box">
+            <img id="crop_image" src="#" class="img-responsive hidden"/>
+          </div>
+
+          <%= hidden_field :user, :image_w, id: 'image_w' %>
+          <%= hidden_field :user, :image_h, id: 'image_h' %>
+          <%= hidden_field :user, :image_x, id: 'image_x' %>
+          <%= hidden_field :user, :image_y, id: 'image_y' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

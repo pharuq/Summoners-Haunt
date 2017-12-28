@@ -6,6 +6,20 @@
     </section>
   </aside>
   <div class="col-md-9">
+    <% if @pending_users.any? %>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title">承認待ち一覧</h3>
+        </div>
+        <div class="panel-body">
+          <div class="users">
+            <%= render partial: "user", collection: @pending_users %>
+          </div>
+          <%= will_paginate @pending_users, :param_name => 'pending_users' %>
+        </div>
+      </div>
+    <% end %>
+
     <div class="panel panel-success">
       <div class="panel-heading">
         <h3 class="panel-title">友達一覧</h3>
@@ -14,7 +28,7 @@
         <div class="users">
           <%= render @users %>
         </div>
-        <%= will_paginate @users %>
+        <%= will_paginate @users, :param_name => 'users' %>
       </div>
     </div>
   </div>

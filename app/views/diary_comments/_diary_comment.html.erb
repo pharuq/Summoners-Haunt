@@ -1,13 +1,14 @@
 <li id="diary_comment-<%= diary_comment.id %>">
-  <span class="content"><%= diary_comment.content %></span>
-  <dev class="timestamp">
+  <span class="content"><%= simple_format(diary_comment.content) %></span>
+  <div class="mini_thumb">
     <%= show_mini_thumb(diary_comment.user) %>
     <%= link_to diary_comment.user.name, diary_comment.user %>
-    <%= diary_comment.updated_at.to_s(:datetime) %>
-
+    <span class="timestamp">
+      <%= diary_comment.updated_at.to_s(:datetime) %>
+    </span>
     <% if current_user?(diary_comment.user) %>
       <%= link_to image_tag('/delete_comment_icon.png', alt: "delete", class: "delete_icon"), diary_comment,
                     method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
-  </dev>
+  </div>
 </li>

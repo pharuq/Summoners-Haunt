@@ -29,9 +29,10 @@
         <h3 class="panel-title">サモナー一覧</h3>
       </div>
       <div class="panel-body">
-        <div class="users">
+        <ul class="users">
           <%= render @users %>
-        </div>
+        </ul>
+        <%= will_paginate @uesrs %>
       </div>
     </div>
   </div>

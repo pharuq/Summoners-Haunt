@@ -8,7 +8,7 @@ class CommunitiesController < ApplicationController
     @community = @user.communities.build(community_params)
     if @community.save
       @community.invite(@user)
-      flash[:success] = "Community created!"
+      flash[:success] = "コミュニティを作成しました！"
       redirect_to @community
     else
       render 'new'
@@ -16,20 +16,18 @@ class CommunitiesController < ApplicationController
   end
 
   def show
-    @user = current_user
     @community = Community.find(params[:id])
     @community_topics = @community.community_topics.paginate(page: params[:page], :per_page => 7)
   end
 
   def edit
-    @user = current_user
     @community = Community.find(params[:id])
   end
 
   def update
     @community = Community.find(params[:id])
     if @community.update_attributes(community_update_params)
-      flash[:success] = "Community Update"
+      flash[:success] = "コミュニティ情報を更新しました。"
       redirect_to @community
     else
       render 'edit'
@@ -38,7 +36,7 @@ class CommunitiesController < ApplicationController
 
   def destroy
     Community.find(params[:id]).destroy
-    flash[:success] = "Community deleted"
+    flash[:success] = "コミュニティを削除しました。"
     redirect_to communities_url
   end
 
@@ -49,9 +47,7 @@ class CommunitiesController < ApplicationController
 
   def members
     @community  = Community.find(params[:id])
-    @user = current_user
     @users = @community.community_members.paginate(page: params[:page], :per_page => 20)
-    render 'show_members'
   end
 
   private
@@ -78,8 +74,8 @@ class CommunitiesController < ApplicationController
     # beforeアクション
 
     def correct_user
-      @user = User.find(params[:id])
-      redirect_to root_url unless current_user?(@user)
+      # @user = User.find(params[:id])
+      # redirect_to root_url unless current_user?(@user)
     end
 
 end

@@ -1,22 +1,33 @@
 <% provide(:title, 'トピック作成') %>
-<h1>トピック作成</h1>
-
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@community_topic, url: community_community_topics_path(params[:community_id]))  do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+  <aside class="col-md-3">
+    <section>
+      <%= render 'communities/community_info' %>
+    </section>
+  </aside>
 
-      <%= hidden_field :community_topic, :community_id, value: @community.id %>
-      <%= hidden_field :community_topic, :user_id, value: current_user.id %>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">トピック作成</h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(@community_topic, url: community_community_topics_path(params[:community_id]))  do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control' %>
+          <%= hidden_field :community_topic, :community_id, value: @community.id %>
+          <%= hidden_field :community_topic, :user_id, value: current_user.id %>
 
-      <%= f.label :content %>
-      <%= f.text_area :content, class: 'form-control' %>
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title, class: 'form-control' %>
 
-      <%= f.submit "送信", class: "btn btn-primary" %>
+          <%= f.label :content, "内容" %>
+          <%= f.text_area :content, rows: TEXT_AREA_BIG_ROW, class: 'form-control' %>
 
-    <% end %>
+          <%= f.submit "作成", class: "btn btn-primary" %>
+
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

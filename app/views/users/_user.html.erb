@@ -1,14 +1,10 @@
-<li>
+<li id="user-<%= user.id %>">
   <div class="icon">
-    <% if user.picture? %>
-      <%= link_to image_tag(user.picture.url(:thumb), alt: user.name, class: "thumb"), user %>
-    <% else %>
-      <%=link_to image_tag('/m_e_others_480_80x80.jpg', alt: user.name, class: "thumb"), user %>
-    <% end %>
+    <%= show_middle_thumb(user) %>
   </div>
-  <span class="name"><%= link_to user.name, user %></span>
-  <span class="profile"><%= user.profile %></span>
-  <% if current_user.admin? && !current_user?(user) %>
+  <div class="name"><%= link_to truncate(user.name, length: 20), user %></div>
+  <div class="profile"><%= truncate(user.profile, length: 65) %></div>
+  <% if  current_user.admin? && current_user?(user) %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>

@@ -7,13 +7,15 @@
   <div class="content">
     <%= truncate(feed_community_comment.content, length: 75) %>
   </div>
-  <dev class="timestamp">
+  <div class="mini_thumb">
     <%= show_mini_thumb(feed_community_comment.user) %>
     <%= link_to feed_community_comment.user.name, feed_community_comment.user %>
-    <% if feed_community_comment.updated_at  < 1.days.ago %>
-      <%= feed_community_comment.updated_at.to_s(:date) %>
-    <% else %>
-      <%= feed_community_comment.updated_at.to_s(:time) %>
-    <% end %>
-  </dev>
+    <span class="timestamp">
+      <% if feed_community_comment.updated_at  < 1.days.ago %>
+        <%= feed_community_comment.updated_at.to_s(:date) %>
+      <% else %>
+        <%= feed_community_comment.updated_at.to_s(:time) %>
+      <% end %>
+    </span>
+  </div>
 </li>

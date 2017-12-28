@@ -10,34 +10,42 @@ class CommunityTopicsController < ApplicationController
     @community = Community.find(params[:community_id])
     @community_topic = CommunityTopic.new(community_topic_params)
     if @community_topic.save
-      flash[:success] = "Community_topic created!"
+      flash[:success] = "トピックを作成しました。"
       redirect_to community_community_topic_path(@community, @community_topic)
     else
-      render 'static_pages/home'
+      render 'new'
     end
   end
 
   def edit
+    @community = Community.find(params[:community_id])
+    @community_topic = CommunityTopic.find(params[:id])
   end
 
   def update
+    @community = Community.find(params[:community_id])
+    @community_topic = CommunityTopic.find(params[:id])
+    if @community_topic.update_attributes(community_topic_params)
+      flash[:success] = "トピックを更新しました。"
+      redirect_to community_community_topic_path(@community, @community_topic)
+    else
+      render 'edit'
+    end
   end
 
   def show
     @community = Community.find(params[:community_id])
+    @user = @community.user
     @community_topic = CommunityTopic.find(params[:id])
     @community_comment = current_user.community_comments.build
-    @community_comments = @community_topic.community_comments
+    @community_comments = @community_topic.community_comments.paginate(page: params[:page], :per_page => 7)
   end
 
   def destroy
     @community = Community.find(params[:community_id])
     CommunityTopic.find(params[:id]).destroy
-    flash[:success] = "CommunityTopic deleted"
+    flash[:success] = "トピックを削除しました。"
     redirect_to @community
-  end
-
-  def index
   end
 
   private
@@ -48,9 +56,9 @@ class CommunityTopicsController < ApplicationController
 
     # beforeアクション
 
-    # コミュニティに属しているかどうか確認
-    def belong_communities_user
-      @community = Community.find(params[:community_id])
-      redirect_to root_url unless current_user.belong_communities?(@community)
-    end
+  # コミュニティに属しているかどうか確認
+  def belong_communities_user
+    @community = Community.find(params[:community_id])
+    redirect_to root_url unless current_user.belong_communities?(@community)
+  end
 end

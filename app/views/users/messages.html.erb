@@ -1,0 +1,22 @@
+<% provide(:title, "メッセージ一覧") %>
+<div class="row">
+  <aside class="col-md-3">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+  </aside>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">メッセージ一覧</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="message_index">
+          <%= render partial: "messages/message_index", collection: @messages %>
+        </ul>
+        <%= will_paginate @messages %>
+      </div>
+    </div>
+  </div>
+</div>

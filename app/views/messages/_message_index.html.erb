@@ -1,0 +1,17 @@
+<% if message_index.from_user == current_user %>
+  <% user = message_index.to_user %>
+<% else %>
+  <% user = message_index.from_user %>
+  <% noread = true unless message_index.read %>
+<% end %>
+
+<li id="message_index-<%= message_index.id %>">
+  <div class="icon">
+    <%= show_message_thumb(user) %>
+  </div>
+  <div class="name">
+    <%= link_to user.name, message_user_path(user) %>
+    <%= image_tag('/new_message.png') if noread %>
+  </div>
+  <div class="content"><%= truncate(message_index.content, length: 75) %></div>
+</li>

@@ -1,5 +1,6 @@
-Hi <%= @user.name %>,
+<%= @user.name %>様
 
-Welcome to the Summoner's Haunt! Click on the link below to activate your account:
+Summoner's Hauntへようこそ！
 
+下記URLをクリックして、アカウントの有効化を行ってください。
 <%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

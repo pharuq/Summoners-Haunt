@@ -11,16 +11,19 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title"><%= @diary.title %></h3>
-          <div class ="diary-date">
+          <div class ="mini_thumb">
+          <span class="timestamp">
+            <%= @diary.updated_at.to_s(:datetime)  %>
+          </span>
             <% if current_user?(@diary.user) %>
               <%= link_to image_tag('/edit_diary_icon.png', alt: "edit", class: "edit_icon"), edit_diary_path %>
               <%= link_to image_tag('/delete_diary_icon.png', alt: "delete", class: "delete_icon"), @diary,
                             method: :delete, data: { confirm: "本当に削除しますか？" } %>
             <% end %>
-              <%= @diary.updated_at.to_s(:datetime)  %>
           </div>
         </div>
         <div class="panel-body">
+          <%= image_tag(@diary.pictures) %>
           <%= simple_format(@diary.content) %>
         </div>
       </div>
@@ -34,6 +37,7 @@
             <ul class="diary_comments">
               <%= render @diary_comments %>
             </ul>
+            <%= will_paginate @diary_comments %>
           </div>
         </div>
       <% end %>

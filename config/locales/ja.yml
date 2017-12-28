@@ -1,1 +1,37 @@
 ja:
+  activerecord:
+    models:
+      user: ユーザー
+      diary: 日記
+      diary_comment: コメント
+      message: メッセージ
+      community: コミュニティ
+      community_topic: トピック
+      community_comment: コメント
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        role: ロール
+        profile: プロフィール
+        picture: 画像
+      diary:
+        title: タイトル
+        content: 内容
+        picture: 画像
+      diary_comment:
+        title: タイトル
+        content: 内容
+      message:
+        content: 内容
+      community:
+        name: 名前
+        content: 内容
+        picture: 画像
+      community_topic:
+        title: タイトル
+        content: 内容
+      community_comment:
+        title: タイトル
+        content: 内容

@@ -5,22 +5,40 @@
       <%= render 'communities/community_info' %>
     </section>
   </aside>
-  <div class="col-md-9">
-    <h1><%= @community_topic.title %></h1>
-
-    <% if current_user?(@community_topic.user) %>
-      <%= link_to "delete", community_community_topic_path(community_id: @community, id: @community_topic), method: :delete,
-                                       data: { confirm: "You sure?" } %>
-    <% end %>
-
-    <p>投稿者：<%= @community_topic.user.name %></p>
-    <p>内容　：<%= @community_topic.content %></p>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @community_topic.title %></h3>
+        <div class="mini_thumb">
+          <%= show_mini_thumb(@user) %>
+          <%= link_to @user.name, @user %>
+          <span class ="timestamp">
+              <%= @community_topic.updated_at.to_s(:datetime)  %>
+              <% if current_user?(@community_topic.user) %>
+                <%= link_to image_tag('/edit_diary_icon.png', alt: "edit", class: "edit_icon"), edit_community_community_topic_path %>
+                <%= link_to image_tag('/delete_diary_icon.png', alt: "delete", class: "delete_icon"), community_community_topic_path,
+                              method: :delete, data: { confirm: "本当に削除しますか？" } %>
+              <% end %>
+          </span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <%= simple_format(@community_topic.content) %>
+      </div>
+    </div>
 
     <% if @community_comments.any? %>
-      <ul class="community_comments">
-        <%= render @community_comments %>
-      </ul>
-
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          コメント
+        </div>
+        <div class="panel-body">
+          <ul class="community_comments">
+            <%= render @community_comments %>
+          </ul>
+          <%= will_paginate @community_comments %>
+        </div>
+      </div>
     <% end %>
 
     <%= form_for(@community_comment,
@@ -31,7 +49,6 @@
       <%= hidden_field :community_comment, :community_id, value: @community.id %>
       <%= hidden_field :community_comment, :community_topic_id, value: @community_topic.id %>
 
-      <%= f.label :content %>
       <%= f.text_area :content, class: 'form-control' %>
 
       <%= f.submit "コメントする", class: "btn btn-primary" %>

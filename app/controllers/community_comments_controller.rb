@@ -1,18 +1,19 @@
 class CommunityCommentsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  # before_action :correct_user,   only: :destroy
 
   def create
     @community_comment = current_user.community_comments.build(community_comment_params)
     if @community_comment.save
-      flash[:success] = "community_comment created!"
+      flash[:success] = "コメントしました。"
       redirect_to request.referrer || root_url
     end
   end
 
   def destroy
+    @community_comment = CommunityComment.find(params[:id])
     @community_comment.destroy
-    flash[:success] = "Diary_comment deleted"
+    flash[:success] = "コメントを削除しました。"
     redirect_to request.referrer || root_url
   end
 

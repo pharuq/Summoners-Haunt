@@ -1,0 +1,25 @@
+<% provide(:title, "メンバー一覧") %>
+<div class="row">
+  <aside class="col-md-3">
+    <section>
+      <%= render 'community_info' %>
+    </section>
+  </aside>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">メンバー一覧</h3>
+      </div>
+      <div class="panel-body">
+        <div class="users">
+          <% if @users.any? %>
+            <div class="users">
+              <%= render @users %>
+            </div>
+            <%= will_paginate @users %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

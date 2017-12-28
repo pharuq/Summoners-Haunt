@@ -8,13 +8,19 @@
   <div class="col-md-6">
     <div class="profile-table-wrapper">
       <table class="profile-table">
+        <colgroup>
+            <col class="profile-table-header">
+            <col>
+            <col class="profile-table-content">
+            <col>
+        </colgroup>
         <tbody>
           <tr>
             <th colspan="2">サモナー情報</th>
           </tr>
           <tr>
-            <td class="profile-table-header">名前</td>
-            <td class="profile-table-content"><%= @user.name %></td>
+            <td>名前</td>
+            <td><%= @user.name %></td>
           </tr>
           <tr>
             <td>ロール</td>

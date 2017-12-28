@@ -29,6 +29,9 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'ransack'
 gem 'cropper-rails'
+gem 'rails-i18n'
+# gem 'redis'
+# gem 'redis-objects'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -69,7 +72,8 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+  # gem 'pg'
+  gem 'sqlite3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

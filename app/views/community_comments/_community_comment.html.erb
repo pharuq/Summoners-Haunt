@@ -1,11 +1,16 @@
 <li id="community_comment-<%= community_comment.id %>">
-  <span class="title"><%= community_comment.user.name %><br></span>
-    <span class="title"><%= community_comment.content %></span>
-  <dev class="timestamp">
-    Posted <%= time_ago_in_words(community_comment.created_at) %> ago.
-    <% if current_user?(community_comment.user) %>
-      <%# link_to "delete", community_comment, method: :delete,
-                                       data: { confirm: "You sure?" } %>
-    <% end %>
-  </dev>
+  <span class="content"><%= simple_format(community_comment.content) %></span>
+  <div class="mini_thumb">
+    <%= show_mini_thumb(community_comment.user) %>
+    <%= link_to community_comment.user.name, community_comment.user %>
+    <span class="timestamp">
+      <%= community_comment.updated_at.to_s(:datetime) %>
+      <% if current_user?(community_comment.user) %>
+        <%= link_to image_tag('/delete_comment_icon.png', alt: "delete", class: "delete_icon"),
+                      community_community_topic_community_comment_path(community_topic_id: params[:id],
+                         id: community_comment.id ),
+                      method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
+    </span>
+  </div>
 </li>

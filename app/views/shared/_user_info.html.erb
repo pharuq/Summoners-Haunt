@@ -11,16 +11,16 @@
             <%= image_tag('/new_diary_icon.png', alt: "diary", class: "center-block") %>
           </li>
         <% end %>
-        <%= link_to edit_user_path(@user) do %>
+        <%= link_to messages_users_path do %>
           <li class="user-info-icon">
-            <%= image_tag('/edit_user_icon.png', alt: "edit_user", class: "center-block") %>
+            <%= image_tag('/message_index_icon.png', alt: "message_index", class: "center-block") %>
           </li>
         <% end %>
       <% else %>
         <%= render 'shared/follow_form' %>
-        <%= link_to user_messages_path(@user.id) do %>
+        <%= link_to message_user_path(@user) do %>
           <li class="user-info-icon">
-            <%= image_tag('/massage_icon.png', alt: "massage", class: "center-block") %>
+            <%= image_tag('/message_icon.png', alt: "message", class: "center-block") %>
           </li>
         <% end %>
       <% end %>
@@ -28,6 +28,6 @@
   </div>
 </div>
 
-<%= render 'shared/user_friends' %>
+  <%= render 'shared/user_friends' %>
 
-<%= render 'shared/user_communities' %>
+  <%= render 'shared/user_communities' %>

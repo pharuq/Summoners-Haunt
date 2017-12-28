@@ -1,10 +1,9 @@
-<h1>Summoner's Haunt</h1>
+<p><%= @user.name %>様</p>
 
-<p>Hi <%= @user.name %>,</p>
+<p>Summoner's Hauntへようこそ！</p>
 
 <p>
-Welcome to the Summoner's Haunt! Click on the link below to activate your account:
+下記URLをクリックして、アカウントの有効化を行ってください。
 </p>
-
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email) %>

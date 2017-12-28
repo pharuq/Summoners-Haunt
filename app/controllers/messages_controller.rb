@@ -1,23 +1,15 @@
 class MessagesController < ApplicationController
 
-
-  def new
-    @user = User.find(params[:user_id])
-    @message = Message.new
-  end
-
   def create
     @message = Message.new(message_params)
     if @message.save
-      flash[:success] = "Message created!"
-      redirect_to root_url
+      # flash[:success] = "Message created!"
+      # @user = User.find(params[:to_user_id])
+      redirect_to request.referrer || root_url
     else
-      render 'static_pages/home'
+      flash[:danger] =  "メッセージに失敗しました。"
+      redirect_to  request.referrer || root_url
     end
-  end
-
-  def index
-    @messages = current_user.messages(params[:user_id])
   end
 
   private

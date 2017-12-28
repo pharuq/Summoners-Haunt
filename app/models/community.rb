@@ -1,15 +1,16 @@
 class Community < ApplicationRecord
-  belongs_to :user
+  attr_accessor :image_x, :image_y, :image_w, :image_h    # crop用の仮想attribute
+  mount_uploader :picture, PictureUploader
   default_scope -> { order(created_at: :desc)}
+
+  belongs_to :user
   has_many :communityships, dependent: :destroy
   has_many :community_members, through: :communityships, source: :user
   has_many :community_topics, dependent: :destroy
   has_many :community_comments, dependent: :destroy
-    # crop用の仮想attribute
-  attr_accessor :image_x, :image_y, :image_w, :image_h
+
   validates :name, presence: true, length: {maximum: 50}
-  validates :content, presence: true
-  mount_uploader :picture, PictureUploader
+  validates :content, presence: true, length: {maximum: 4000}
   validate  :picture_size
 
   # 現在のユーザーが友達であればtrueを返す
