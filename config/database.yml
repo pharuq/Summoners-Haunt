@@ -6,20 +6,20 @@
 #
 default: &default
   adapter: postgresql
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
-  # <<: *default
+  <<: *default
   # database: db/development.sqlite3
-  adapter: postgresql
+  # adapter: postgresql
   host: localhost
-  encoding: utf8
   database: postgres
   username: postgres
   password: postgres24
-  pool: 5
-  timeout: 5000
+  # pool: 5
+  # timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -30,4 +30,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  host: localhost
+  database: summoners_haunt_db
+  username: pharuq
+  password: postgres24
