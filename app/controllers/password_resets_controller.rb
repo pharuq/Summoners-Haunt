@@ -1,7 +1,8 @@
 class PasswordResetsController < ApplicationController
-before_action :get_user,   only: [:edit, :update]
-before_action :valid_user, only: [:edit, :update]
-before_action :check_expiration, only: [:edit, :update]
+  skip_before_action :logged_in_user
+  before_action :get_user,   only: [:edit, :update]
+  before_action :valid_user, only: [:edit, :update]
+  before_action :check_expiration, only: [:edit, :update]
 
   def new
   end
@@ -55,7 +56,7 @@ private
 
   def check_expiration
     if @user.password_reset_expired?
-      flash[:danger] = "Password reset has expired."
+      flash[:danger] = "パスワードリセットの有効期限が切れています。"
       redirect_to new_password_reset_url
     end
   end

@@ -32,6 +32,7 @@ gem 'cropper-rails'
 gem 'rails-i18n'
 # gem 'redis'
 # gem 'redis-objects'
+gem 'pg'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -49,7 +50,7 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+  # gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -64,6 +65,7 @@ group :development do
   gem 'listen'
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'bullet'
 end
 
 group :test do
@@ -72,8 +74,8 @@ group :test do
 end
 
 group :production do
-  # gem 'pg'
-  gem 'sqlite3'
+  # gem 'sqlite3'
+  # gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

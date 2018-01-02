@@ -1,21 +1,18 @@
 class PictureUploader < CarrierWave::Uploader::Base
-
   include CarrierWave::MiniMagick
-  # process resize_to_limit: [240, 240]
-  process :crop
-  process resize_to_fill: [240, 240]
-  # process resize_and_pad: [240, 240, "#000", "Center"]
+
+  version :big_thumb do
+    process :crop
+    process resize_to_fill: [240, 240]
+  end
 
   version :thumb do
-    # process resize_to_limit: [80, 80]
-    # process resize_and_pad: [80, 80, "#000", "Center"]
-    # process :crop
+    process :crop
     process resize_to_fill: [80, 80]
   end
 
   version :mini_thumb do
-    # process resize_to_limit: [80, 80]
-    # process resize_and_pad: [24, 24, "#000", "Center"]
+    process :crop
     process resize_to_fill: [24, 24]
   end
 
@@ -42,7 +39,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   private
 
     def crop
-      return unless [model.image_x, model.image_y, model.image_w, model.image_h].all?
+      return if [model.image_x, model.image_y, model.image_w, model.image_h].nil?
       manipulate! do |img|
         crop_x = model.image_x.to_i
         crop_y = model.image_y.to_i

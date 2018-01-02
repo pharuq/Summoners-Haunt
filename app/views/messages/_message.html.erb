@@ -9,7 +9,7 @@
     <!-- <div class="arrow"></div> -->
     <div class="popover-content">
       <p>
-        <%= simple_format(message.content) %>
+        <%= simple_format(hbr(message.content)) %>
       </p>
       <div class="message-timestamp">
         <%= message.created_at.to_s(:datetime) %>

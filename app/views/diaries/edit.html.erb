@@ -26,6 +26,11 @@
         <label><%= f.radio_button :shared_with, SHARED_WITH_FRIENDS_ONLY,
                                                 class: 'shared-with' %>友達のみ</label>
 
+        <div class="picture">
+          <%= f.label :pictures, '画像投稿' %><br>
+          <%= f.file_field :pictures, multiple: true, accept: 'image/jpeg,image/gif,image/png', class: 'input_picture' %>
+        </div>
+
         <%= f.submit "投稿", class: "btn btn-primary" %>
           <% end %>
       </div>

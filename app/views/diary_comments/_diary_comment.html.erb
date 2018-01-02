@@ -1,5 +1,5 @@
 <li id="diary_comment-<%= diary_comment.id %>">
-  <span class="content"><%= simple_format(diary_comment.content) %></span>
+  <span class="content"><%= simple_format(hbr(diary_comment.content)) %></span>
   <div class="mini_thumb">
     <%= show_mini_thumb(diary_comment.user) %>
     <%= link_to diary_comment.user.name, diary_comment.user %>

@@ -23,8 +23,11 @@
           </div>
         </div>
         <div class="panel-body">
-          <%= image_tag(@diary.pictures) %>
-          <%= simple_format(@diary.content) %>
+          <% @diary.pictures.each do |picture| %>
+            <%= link_to image_tag(picture.url(:thumb), alt: "diary_picture"),image_tag(picture.url), data:{lity: "data-lity"} %>
+          <% end %>
+           <!-- <%= image_tag("//ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/Aatrox.png") %> -->
+          <%= simple_format(hbr(@diary.content)) %>
         </div>
       </div>
 

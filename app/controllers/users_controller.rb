@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user,  only: [:edit, :edit_password, :update, :destroy,
-                                        :friends, :index]
+  skip_before_action :logged_in_user, only: [:new, :create]
   before_action :correct_user, only: [:edit, :edit_password, :update]
   before_action :admin_user, only: [:destroy]
 
@@ -95,7 +94,7 @@ class UsersController < ApplicationController
   def message
     @user = User.find(params[:id])
     @message = Message.new
-    @messages = current_user.messages(@user).paginate(page: params[:page], :per_page => 12)
+    @messages = current_user.messages(@user).includes(:from_user).paginate(page: params[:page], :per_page => 12)
     #既読をつける
     @messages.where(["read = ? and from_user_id = ?", false, @user]).find_each do |message|
       message.update_attribute(:read, true)

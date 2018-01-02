@@ -206,6 +206,10 @@ input[type=checkbox],input[type=radio] {
   margin-bottom: 10px;
 }
 
+.login_form {
+  // margin-top: 100px;
+}
+
 /* header */
 #logo {
   float: left;
@@ -419,7 +423,7 @@ footer {
   vertical-align: middle;
 }
 
-span.picture {
+.picture {
   margin-top: 10px;
   input {
     border: 0;

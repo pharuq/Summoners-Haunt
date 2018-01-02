@@ -1,5 +1,5 @@
 class CommunityTopicsController < ApplicationController
-  before_action :belong_communities_user, only: [:new, :create, :edit, :update]
+  before_action :belong_communities_user, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @community = Community.find(params[:community_id])
@@ -38,7 +38,7 @@ class CommunityTopicsController < ApplicationController
     @user = @community.user
     @community_topic = CommunityTopic.find(params[:id])
     @community_comment = current_user.community_comments.build
-    @community_comments = @community_topic.community_comments.paginate(page: params[:page], :per_page => 7)
+    @community_comments = @community_topic.community_comments.includes(:user).paginate(page: params[:page], :per_page => 7)
   end
 
   def destroy
@@ -59,6 +59,9 @@ class CommunityTopicsController < ApplicationController
   # コミュニティに属しているかどうか確認
   def belong_communities_user
     @community = Community.find(params[:community_id])
-    redirect_to root_url unless current_user.belong_communities?(@community)
+    unless current_user.belong_communities?(@community)
+      flash[:danger] = "コミュニティに参加していないと操作できません。"
+      redirect_to request.referrer || root_url
+    end
   end
 end

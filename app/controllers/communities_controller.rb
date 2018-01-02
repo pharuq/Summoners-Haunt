@@ -17,7 +17,7 @@ class CommunitiesController < ApplicationController
 
   def show
     @community = Community.find(params[:id])
-    @community_topics = @community.community_topics.paginate(page: params[:page], :per_page => 7)
+    @community_topics = @community.community_topics.includes(:user).paginate(page: params[:page], :per_page => 7)
   end
 
   def edit

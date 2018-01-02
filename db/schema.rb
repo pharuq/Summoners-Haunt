@@ -12,23 +12,27 @@
 
 ActiveRecord::Schema.define(version: 20171228063119) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "adminpack"
+
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.text "content"
     t.string "picture"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_communities_on_user_id"
   end
 
   create_table "community_comments", force: :cascade do |t|
-    t.integer "community_topic_id"
-    t.integer "user_id"
+    t.bigint "community_topic_id"
+    t.bigint "user_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "community_id"
+    t.bigint "community_id"
     t.index ["community_id"], name: "index_community_comments_on_community_id"
     t.index ["community_topic_id", "created_at"], name: "index_community_comments_on_community_topic_id_and_created_at"
     t.index ["community_topic_id"], name: "index_community_comments_on_community_topic_id"
@@ -38,8 +42,8 @@ ActiveRecord::Schema.define(version: 20171228063119) do
   create_table "community_topics", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id"
-    t.integer "community_id"
+    t.bigint "user_id"
+    t.bigint "community_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["community_id"], name: "index_community_topics_on_community_id"
@@ -47,8 +51,8 @@ ActiveRecord::Schema.define(version: 20171228063119) do
   end
 
   create_table "communityships", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "community_id"
+    t.bigint "user_id"
+    t.bigint "community_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["community_id"], name: "index_communityships_on_community_id"
@@ -59,18 +63,18 @@ ActiveRecord::Schema.define(version: 20171228063119) do
   create_table "diaries", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "shared_with", default: 0
-    t.string "pictures"
+    t.json "pictures"
     t.index ["user_id", "created_at"], name: "index_diaries_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
   create_table "diary_comments", force: :cascade do |t|
-    t.integer "diary_id"
-    t.integer "user_id"
+    t.bigint "diary_id"
+    t.bigint "user_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -121,4 +125,15 @@ ActiveRecord::Schema.define(version: 20171228063119) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "communities", "users"
+  add_foreign_key "community_comments", "communities"
+  add_foreign_key "community_comments", "community_topics"
+  add_foreign_key "community_comments", "users"
+  add_foreign_key "community_topics", "communities"
+  add_foreign_key "community_topics", "users"
+  add_foreign_key "communityships", "communities"
+  add_foreign_key "communityships", "users"
+  add_foreign_key "diaries", "users"
+  add_foreign_key "diary_comments", "diaries"
+  add_foreign_key "diary_comments", "users"
 end

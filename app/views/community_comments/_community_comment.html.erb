@@ -1,5 +1,5 @@
 <li id="community_comment-<%= community_comment.id %>">
-  <span class="content"><%= simple_format(community_comment.content) %></span>
+  <span class="content"><%= simple_format(hbr(community_comment.content)) %></span>
   <div class="mini_thumb">
     <%= show_mini_thumb(community_comment.user) %>
     <%= link_to community_comment.user.name, community_comment.user %>

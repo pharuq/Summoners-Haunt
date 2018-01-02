@@ -9,9 +9,15 @@ module ApplicationHelper
         end
     end
 
+    # HTMLで書けない文字の実体参照と改行コードのHTMLへの置換を行う
+    def hbr(target)
+      target = html_escape(target)
+      target.gsub(/\r\n|\r|\n/, "<br />")
+    end
+
     def show_big_thumb(user)
       if user.picture.present?
-        image_tag(user.picture.url, alt: user.name, class: "img-thumbnail center-block")
+        image_tag(user.picture.url(:big_thumb), alt: user.name, class: "img-thumbnail center-block")
       else
         image_tag('/m_e_others_480_240x240.jpg', alt: user.name, class: "img-thumbnail center-block")
       end

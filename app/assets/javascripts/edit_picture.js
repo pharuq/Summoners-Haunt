@@ -17,6 +17,17 @@ $(function() {
   }
 
   $(".input_picture").change(function(){
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('ファイルサイズが大きいです。5MB以下の画像を選択してください。');
+      $(".submit").prop('disabled', true);
+    } else if (this.files.length > 3) {
+      alert('ファイルは３つまでにしてください。');
+      $(".submit").prop('disabled', true);
+    } else {
+      $(".submit").prop('disabled', false);
+    }
+
     $('#crop_image').removeClass('hidden');
     readURL(this);
   });
@@ -31,13 +42,6 @@ $(function() {
      $('#image_h').val(Math.round(data.height));
      $('#image_x').val(Math.round(data.x));
      $('#image_y').val(Math.round(data.y));
-  });
-
-  $('#user_picture').bind('change', function() {
-    var size_in_megabytes = this.files[0].size/1024/1024;
-    if (size_in_megabytes > 5) {
-      alert('ファイルサイズが大きいです。なるべく5MB以下の画像を選択してください。');
-    }
   });
 
 });

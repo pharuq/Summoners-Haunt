@@ -1,5 +1,4 @@
 class DiariesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def new
@@ -9,9 +8,7 @@ class DiariesController < ApplicationController
 
   def create
     @user = current_user
-    logger.debug "出力したいデバッグ情報"
-    logger.debug diary_params
-    @diary = current_user.diaries.build(diary_params)
+    @diary = @user.diaries.build(diary_params)
     if @diary.save
       flash[:success] = "日記を作成しました。"
       redirect_to @diary
@@ -24,7 +21,7 @@ class DiariesController < ApplicationController
     @diary = Diary.find(params[:id])
     @user = @diary.user
     @diary_comment = current_user.diary_comments.build
-    @diary_comments = @diary.diary_comments.paginate(page: params[:page], :per_page => 7)
+    @diary_comments = @diary.diary_comments.includes(:user).paginate(page: params[:page], :per_page => 7)
   end
 
   def edit

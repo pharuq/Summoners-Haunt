@@ -1,11 +1,14 @@
 class StaticPagesController < ApplicationController
+  skip_before_action :logged_in_user
+
   def home
     if logged_in?
       @user = current_user
       # フィードの最大件数、'total_entries: MAX_LIMIT_FEED'がうまく動作しない
-      @diaries = current_user.feed.paginate(page: params[:diaries],
+      @diaries = current_user.feed.includes(:user).paginate(page: params[:diaries],
                                       :per_page => MAX_SHOW_FEED)
-      @feed_community_comments = @user.feed_topics.paginate(page: params[:feed_community_comments],
+      @feed_community_comments = @user.feed_topics.includes(:community, :community_topic, :user)
+                                                      .paginate(page: params[:feed_community_comments],
                                       :per_page => MAX_SHOW_FEED)
       @rss = Array.new(getRSS)
     end
