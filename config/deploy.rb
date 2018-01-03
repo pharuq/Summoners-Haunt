@@ -4,6 +4,8 @@ lock "~> 3.10.1"
 set :application, 'summoners_haunt'
 set :repo_url, " https://github.com/pharuq/Summoners-Haunt.git"
 
+set :bundle_flags, '--quiet'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
