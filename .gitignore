@@ -31,3 +31,5 @@
 
 .pryrc
 .DS_Store
+
+Gemfile.lock
