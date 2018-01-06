@@ -39,6 +39,7 @@ install_plugin Capistrano::Puma
 
 # require 'capistrano/rbenv'
 # require 'capistrano/rbenv_vars'
+require "whenever/capistrano" 
 
 # require "capistrano/rails/migrations"
 # require "capistrano/passenger"

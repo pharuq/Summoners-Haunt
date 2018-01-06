@@ -31,5 +31,6 @@
 
 .pryrc
 .DS_Store
+/public/uploads
 
 Gemfile.lock

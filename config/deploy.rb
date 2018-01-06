@@ -35,8 +35,9 @@ append :linked_files, "config/database.yml", "config/secrets.yml", ".rbenv-vars"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-# append :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets bundle public/system public/assets}
-append :linked_dirs, "bin", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "bundle", "public/system", "public/assets"
+# append :linked_dirs, "bin", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "bundle", "public/system", "public/assets"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "bundle", "public/system", "public/assets"
+set :bundle_binstubs, -> { shared_path.join('bin') }
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
