@@ -46,6 +46,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'whenever', :require => false
+gem 'mail-iso-2022-jp'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
