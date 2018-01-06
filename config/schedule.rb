@@ -21,6 +21,5 @@
 
 every :reboot do
  command "cd /home/rails/summoners_haunt/current \n
-   &&  exec bundle exec puma \n
-     -C /home/rails/summoners_haunt/shared/puma.rb --daemon"
+   &&  exec bundle exec puma -C /home/rails/summoners_haunt/shared/puma.rb --daemon"
 end
