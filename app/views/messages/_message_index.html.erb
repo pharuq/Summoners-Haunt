@@ -11,7 +11,7 @@
   </div>
   <div class="name">
     <%= link_to user.name, message_user_path(user) %>
-    <%= image_tag('/new_message.png') if noread %>
+    <%= image_tag('/static_images/new_message.png') if noread %>
   </div>
   <div class="content"><%= truncate(message_index.content, length: 75) %></div>
 </li>

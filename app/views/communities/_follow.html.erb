@@ -1,6 +1,6 @@
 <%= form_for(@community.communityships.build, remote: true) do |f| %>
   <div><%= hidden_field_tag :community_id, @community.id %></div>
   <%= button_tag type: :submit, class: "change-submit", data: { confirm: "コミュニティに参加しますか？" } do %>
-    <%= image_tag "/frined_add_icon.png", alt: "add_community", class: "center-block" %>
+    <%= image_tag "/static_images/frined_add_icon.png", alt: "add_community", class: "center-block" %>
   <% end %>
 <% end %>

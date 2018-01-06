@@ -19,7 +19,7 @@ module ApplicationHelper
       if user.picture.present?
         image_tag(user.picture.url(:big_thumb), alt: user.name, class: "img-thumbnail center-block")
       else
-        image_tag('/m_e_others_480_240x240.jpg', alt: user.name, class: "img-thumbnail center-block")
+        image_tag('/static_images/m_e_others_480_240x240.jpg', alt: user.name, class: "img-thumbnail center-block")
       end
     end
 
@@ -27,7 +27,7 @@ module ApplicationHelper
       if user.picture.present?
         link_to image_tag(user.picture.url(:thumb), alt: user.name, class: "center-block"), user
       else
-        link_to image_tag('/m_e_others_480_80x80.jpg', alt: user.name, class: "center-block"), user
+        link_to image_tag('/static_images/m_e_others_480_80x80.jpg', alt: user.name, class: "center-block"), user
       end
     end
 
@@ -35,7 +35,7 @@ module ApplicationHelper
       if user.picture.present?
         link_to image_tag(user.picture.url(:mini_thumb), alt: user.name, class: "img-circle"), user
       else
-        link_to image_tag('/m_e_others_480_24x24.jpg', alt: user.name, class: "img-circle"), user
+        link_to image_tag('/static_images/m_e_others_480_24x24.jpg', alt: user.name, class: "img-circle"), user
       end
     end
 
@@ -43,7 +43,7 @@ module ApplicationHelper
       if user.picture.present?
         link_to image_tag(user.picture.url(:thumb), alt: user.name, class: "center-block"), message_user_path(user)
       else
-        link_to image_tag('/m_e_others_480_80x80.jpg', alt: user.name, class: "center-block"), message_user_path(user)
+        link_to image_tag('/static_images/m_e_others_480_80x80.jpg', alt: user.name, class: "center-block"), message_user_path(user)
       end
     end
 
@@ -51,7 +51,7 @@ module ApplicationHelper
       if user.picture.present?
         image_tag(user.picture.url(:thumb), alt: user.name, class: "center-block")
       else
-        image_tag('/m_e_others_480_80x80.jpg', alt: user.name, class: "center-block")
+        image_tag('/static_images/m_e_others_480_80x80.jpg', alt: user.name, class: "center-block")
       end
     end
 

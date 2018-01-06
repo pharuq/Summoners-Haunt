@@ -1,7 +1,7 @@
 <li id="diary-<%= diary.id %>">
   <div class="title">
     <span><%= link_to truncate(diary.title, length: 50), diary %></span>
-    <%= image_tag('/key.jpg') if diary.shared_with == SHARED_WITH_FRIENDS_ONLY %>
+    <%= image_tag('/static_images/key.jpg') if diary.shared_with == SHARED_WITH_FRIENDS_ONLY %>
   </div>
   <div class="content">
     <%= truncate(diary.content, length: 75) %>

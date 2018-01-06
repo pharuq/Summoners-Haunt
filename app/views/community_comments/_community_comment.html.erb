@@ -6,7 +6,7 @@
     <span class="timestamp">
       <%= community_comment.updated_at.to_s(:datetime) %>
       <% if current_user?(community_comment.user) %>
-        <%= link_to image_tag('/delete_comment_icon.png', alt: "delete", class: "delete_icon"),
+        <%= link_to image_tag('/static_images/delete_comment_icon.png', alt: "delete", class: "delete_icon"),
                       community_community_topic_community_comment_path(community_topic_id: params[:id],
                          id: community_comment.id ),
                       method: :delete, data: { confirm: "本当に削除しますか？" } %>

@@ -3,6 +3,6 @@
                                                     remote: true) do |f| %>
   <div><%= hidden_field_tag :community_id, @community.id %></div>
   <%= button_tag type: :submit, class: "change-submit", data: { confirm: "コミュニティを退会しますか？" } do %>
-    <%= image_tag "/frined_sub_icon.png", alt: "sub_community", class: "center-block" %>
+    <%= image_tag "/static_images/frined_sub_icon.png", alt: "sub_community", class: "center-block" %>
   <% end %>
 <% end %>

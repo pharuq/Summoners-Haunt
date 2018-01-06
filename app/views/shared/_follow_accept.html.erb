@@ -2,7 +2,7 @@
                                                                 html: { class: "follow-accept-icon" },remote: true) do |f| %>
   <div><%= hidden_field_tag :to_user_id, @user.id %></div>
   <%= button_tag type: :submit, class: "change-submit", data: { confirm: "承認しますか？" } do %>
-    <%= image_tag "/frined_add_icon.png", alt: "add_friend", class: "" %>
+    <%= image_tag "/static_images/frined_add_icon.png", alt: "add_friend", class: "" %>
   <% end %>
 <% end %>
 
@@ -11,6 +11,6 @@
                                                     remote: true) do |f| %>
   <div><%= hidden_field_tag :to_user_id, @user.id %></div>
   <%= button_tag type: :submit, class: "change-submit", data: { confirm: "申請を拒否しますか？" } do %>
-    <%= image_tag "/frined_sub_icon.png", alt: "sub_friend", class: "" %>
+    <%= image_tag "/static_images/frined_sub_icon.png", alt: "sub_friend", class: "" %>
   <% end %>
 <% end %>

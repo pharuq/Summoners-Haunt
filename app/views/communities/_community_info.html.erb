@@ -8,19 +8,19 @@
       <% if current_user?(@community.user) %>
         <%= link_to edit_community_path(@community) do %>
           <li class="community-info-icon border-right">
-            <%= image_tag('/edit_community_icon.png', alt: "edit_community", class: "center-block") %>
+            <%= image_tag('/static_images/edit_community_icon.png', alt: "edit_community", class: "center-block") %>
           </li>
         <% end %>
         <%= link_to new_community_community_topic_path(@community) do %>
           <li class="community-info-icon">
-            <%= image_tag('/new_community_topic_icon.png', alt: "new_community_topic", class: "center-block") %>
+            <%= image_tag('/static_images/new_community_topic_icon.png', alt: "new_community_topic", class: "center-block") %>
           </li>
         <% end %>
       <% else %>
         <%= render 'communities/follow_form' %>
         <%= link_to new_community_community_topic_path(@community) do %>
           <li class="community-info-icon">
-            <%= image_tag('/new_community_topic_icon.png', alt: "new_community_topic", class: "center-block") %>
+            <%= image_tag('/static_images/new_community_topic_icon.png', alt: "new_community_topic", class: "center-block") %>
           </li>
         <% end %>
       <% end %>

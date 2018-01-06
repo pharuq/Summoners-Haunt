@@ -7,7 +7,7 @@
       <%= diary_comment.updated_at.to_s(:datetime) %>
     </span>
     <% if current_user?(diary_comment.user) %>
-      <%= link_to image_tag('/delete_comment_icon.png', alt: "delete", class: "delete_icon"), diary_comment,
+      <%= link_to image_tag('/static_images/delete_comment_icon.png', alt: "delete", class: "delete_icon"), diary_comment,
                     method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
   </div>

@@ -15,8 +15,8 @@
           <span class ="timestamp">
               <%= @community_topic.updated_at.to_s(:datetime)  %>
               <% if current_user?(@community_topic.user) %>
-                <%= link_to image_tag('/edit_diary_icon.png', alt: "edit", class: "edit_icon"), edit_community_community_topic_path %>
-                <%= link_to image_tag('/delete_diary_icon.png', alt: "delete", class: "delete_icon"), community_community_topic_path,
+                <%= link_to image_tag('/static_images/edit_diary_icon.png', alt: "edit", class: "edit_icon"), edit_community_community_topic_path %>
+                <%= link_to image_tag('/static_images/delete_diary_icon.png', alt: "delete", class: "delete_icon"), community_community_topic_path,
                               method: :delete, data: { confirm: "本当に削除しますか？" } %>
               <% end %>
           </span>
