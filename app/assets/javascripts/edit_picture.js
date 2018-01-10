@@ -1,21 +1,5 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
   // var $image = $('#crop_area_box > img'),replaced;
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#crop_image').attr('src', e.target.result);
-        $('#crop_image').cropper("destroy");
-        $('#crop_image').cropper({
-          aspectRatio: 4 / 4
-        });
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
   $(".input_picture").change(function(){
     var size_in_megabytes = this.files[0].size/1024/1024;
     if (size_in_megabytes > 5) {
@@ -32,7 +16,6 @@ $(function() {
     readURL(this);
   });
 
-
   // getDataボタンが押された時の処理
   $('.submit').on('click', function(){
      // crop のデータを取得
@@ -44,4 +27,18 @@ $(function() {
      $('#image_y').val(Math.round(data.y));
   });
 
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#crop_image').attr('src', e.target.result);
+        $('#crop_image').cropper("destroy");
+        $('#crop_image').cropper({
+          aspectRatio: 4 / 4
+        });
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 });
