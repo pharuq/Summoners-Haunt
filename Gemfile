@@ -32,7 +32,8 @@ gem 'cropper-rails'
 gem 'rails-i18n'
 # gem 'redis'
 # gem 'redis-objects'
-gem 'pg'
+# gem 'pg'
+gem 'pg', '~> 0.18'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
