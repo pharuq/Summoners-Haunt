@@ -6,6 +6,9 @@ class AccountActivationsController < ApplicationController
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       user.activate
       log_in user
+      #ユーザーを初期コミュニティに参加させる
+      community = Community.find(1)
+      community.invate(user)
       flash[:success] = "アカウントが認証されました！"
       redirect_to root_url
     else
