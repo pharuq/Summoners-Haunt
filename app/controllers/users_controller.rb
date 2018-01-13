@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :logged_in_user, only: [:new, :create]
   before_action :correct_user, only: [:edit, :edit_password, :update]
-  before_action :admin_user, only: [:destroy]
+  # before_action :admin_user, only: [:destroy]
 
   def show
     @user = User.find(params[:id])
@@ -122,7 +122,7 @@ class UsersController < ApplicationController
     end
 
     # 管理者かどうか確認
-    def admin_user
-      redirect_to root_url unless current_user.admin?
-    end
+    # def admin_user
+    #   redirect_to root_url unless current_user.admin?
+    # end
 end
