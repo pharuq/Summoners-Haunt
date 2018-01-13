@@ -5,24 +5,18 @@ class DiariesController < ApplicationController
     @user = current_user
     @diary = Diary.new
 
-    uri = URI.parse("https://jp1.api.riotgames.com/lol/static-data/v3/versions?api_key=#{Rails.application.secrets.riot_games_api}")
-    version_data = JSON.parse(Net::HTTP.get(uri))
-    last_version =  version_data[1]
-    p "テストバージョン"
-    p version_data
-    p last_version
-    uri = URI.parse("https://jp1.api.riotgames.com/lol/static-data/v3/champions?locale=ja_JP&version=#{last_version}&tags=image&dataById=true?api_key=#{Rails.application.secrets.riot_games_api}")
-    p "テスト"
-    p uri
-    champions_json = JSON.parse(Net::HTTP.get(uri))
-
-    p "テスト"
-    p champions_json
-    champions_data = champions_json['data']
-
-
-    # p champins_data
-
+    # uri = URI.parse("https://jp1.api.riotgames.com/lol/static-data/v3/versions?api_key=#{Rails.application.secrets.riot_games_api}")
+    # version_data = JSON.parse(Net::HTTP.get(uri))
+    # last_version =  version_data[0]
+    # last_version =  "8.1.1"
+    # # uri = URI.parse("https://jp1.api.riotgames.com/lol/static-data/v3/champions?locale=ja_JP&version=#{last_version}&tags=image&dataById=true?api_key=#{Rails.application.secrets.riot_games_api}")
+    # uri = URI.parse("https://jp1.api.riotgames.com/lol/static-data/v3/items/1001?locale=ja_JP&tags=image&version=8.1.1?api_key=#{Rails.application.secrets.riot_games_api}")
+    # p "テスト"
+    # p uri
+    # items_json = JSON.parse(Net::HTTP.get(uri))
+    # p items_json
+    # items_data = items_json['image']
+    # p items_data
 
   end
 
